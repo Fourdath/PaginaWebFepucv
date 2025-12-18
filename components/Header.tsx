@@ -8,6 +8,7 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Inicio', path: '/' },
+    { name: 'Facultades', path: '/facultades' },
     { name: 'Noticias', path: '/noticias' },
     { name: 'Servicios', path: '/servicios' },
     { name: 'Reglamentos', path: '/reglamentos' },
@@ -23,11 +24,11 @@ export const Header: React.FC = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-fepucv-primary rounded-full flex items-center justify-center text-fepucv-secondary font-bold text-xl">
+            <div className="w-12 h-12 bg-fepucv-primary rounded-full flex items-center justify-center text-fepucv-secondary font-bold text-xl shadow-inner">
               F
             </div>
             <div>
-              <span className="block text-xl font-bold text-fepucv-secondary leading-none">FEPUCV</span>
+              <span className="block text-xl font-bold text-fepucv-secondary leading-none tracking-tight">FEPUCV</span>
               <span className="text-[10px] text-fepucv-textSecondary uppercase tracking-widest font-semibold">Federación PUCV</span>
             </div>
           </Link>
@@ -38,9 +39,9 @@ export const Header: React.FC = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors ${
+                className={`text-xs font-bold uppercase tracking-wider transition-colors ${
                   isActive(link.path) 
-                    ? 'text-fepucv-secondary border-b-2 border-fepucv-secondary' 
+                    ? 'text-fepucv-secondary border-b-2 border-fepucv-primary pb-1' 
                     : 'text-fepucv-textSecondary hover:text-fepucv-secondary'
                 }`}
               >
@@ -49,7 +50,7 @@ export const Header: React.FC = () => {
             ))}
             <Link
               to="/contacto"
-              className="bg-fepucv-primary text-fepucv-secondary px-5 py-2.5 rounded-fepucv text-sm font-semibold hover:bg-fepucv-light transition-all shadow-md active:scale-95"
+              className="bg-fepucv-primary text-fepucv-secondary px-5 py-2.5 rounded-fepucv text-xs font-bold uppercase tracking-widest hover:bg-fepucv-light transition-all shadow-md active:scale-95"
             >
               Contacto
             </Link>
@@ -79,7 +80,7 @@ export const Header: React.FC = () => {
               key={link.path}
               to={link.path}
               onClick={() => setIsMenuOpen(false)}
-              className={`block px-4 py-3 rounded-fepucv text-base font-medium ${
+              className={`block px-4 py-3 rounded-fepucv text-sm font-bold uppercase tracking-wider ${
                 isActive(link.path) ? 'bg-fepucv-surface text-fepucv-secondary' : 'text-fepucv-textSecondary'
               }`}
             >
@@ -89,7 +90,7 @@ export const Header: React.FC = () => {
           <Link
             to="/contacto"
             onClick={() => setIsMenuOpen(false)}
-            className="block w-full text-center bg-fepucv-primary text-fepucv-secondary py-3 rounded-fepucv font-semibold mt-4"
+            className="block w-full text-center bg-fepucv-primary text-fepucv-secondary py-3 rounded-fepucv font-bold uppercase tracking-widest mt-4"
           >
             Contacto
           </Link>

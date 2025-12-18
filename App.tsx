@@ -11,6 +11,8 @@ import { AboutUs } from './pages/AboutUs';
 import { FAQPage } from './pages/FAQPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { FacultiesPage } from './pages/FacultiesPage';
+import { FacultyDetail } from './pages/FacultyDetail';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { NewsItem } from './types';
@@ -47,6 +49,8 @@ const App: React.FC = () => {
             <Route path="/quienes-somos" element={<AboutUs />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contacto" element={<ContactPage />} />
+            <Route path="/facultades" element={<FacultiesPage />} />
+            <Route path="/facultades/:slug" element={<FacultyDetail />} />
             <Route path="/admin" element={<AdminDashboard onAddNews={handleAddNews} />} />
           </Routes>
         </main>

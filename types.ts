@@ -17,6 +17,7 @@ export interface ExecutiveMember {
   role: string;
   major: string;
   image: string;
+  type: 'mesa' | 'superior' | 'facultad';
 }
 
 export interface ServiceItem {
@@ -40,4 +41,22 @@ export interface FAQItem {
   id: string;
   question: string;
   answer: string;
+}
+
+export interface FacultyRepresentative {
+  name: string;
+  role: string;
+  email: string;
+  image: string;
+}
+
+export interface Faculty {
+  id: string;
+  name: string;
+  shortName: string;
+  slug: string;
+  icon: string;
+  representatives: FacultyRepresentative[];
+  careers: string[];
+  instagram?: string;
 }
