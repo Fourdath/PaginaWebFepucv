@@ -162,7 +162,7 @@ export const Home: React.FC<HomeProps> = ({ news }) => {
               to="/facultades" 
               className="text-fepucv-secondary font-bold text-sm hover:text-fepucv-primary transition-colors hidden sm:block"
             >
-              Ver todos los consejeros de facultad >
+              Ver todos los consejeros de facultad →
             </Link>
           </div>
 
