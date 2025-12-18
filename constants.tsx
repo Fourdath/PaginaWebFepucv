@@ -51,12 +51,12 @@ export const INITIAL_NEWS: NewsItem[] = [
 
 export const EXECUTIVE_BOARD: ExecutiveMember[] = [
   // MESA EJECUTIVA
-  { id: 'm1', name: 'Sofía Valenzuela', role: 'Presidente', major: 'Derecho', image: 'https://picsum.photos/seed/sofia/400/500', type: 'mesa' },
-  { id: 'm2', name: 'Ignacio Rojas', role: 'Vicepresidente', major: 'Ingeniería Civil', image: 'https://picsum.photos/seed/ignacio/400/500', type: 'mesa' },
-  { id: 'm3', name: 'Camila Soto', role: 'Secretaria General', major: 'Psicología', image: 'https://picsum.photos/seed/camila/400/500', type: 'mesa' },
-  { id: 'm4', name: 'Mateo Núñez', role: 'Secretaria de Finanzas', major: 'Ingeniería Comercial', image: 'https://picsum.photos/seed/mateo/400/500', type: 'mesa' },
-  { id: 'm5', name: 'Valentina Paredes', role: 'Secretaria de Bienestar y Extensión', major: 'Trabajo Social', image: 'https://picsum.photos/seed/valentina/400/500', type: 'mesa' },
-  { id: 'm6', name: 'Diego Silva', role: 'Secretaria de Comunicaciones', major: 'Periodismo', image: 'https://picsum.photos/seed/diego/400/500', type: 'mesa' },
+  { id: 'm1', name: 'Valeria Aguilera', role: 'Presidente', major: 'presidencia.fepucv@gmail.com', image: 'https://picsum.photos/seed/sofia/400/500', type: 'mesa' },
+  { id: 'm2', name: 'Mirko Peña', role: 'Vicepresidente', major: 'vicepresidencia.fepucv@gmail.com', image: 'https://picsum.photos/seed/ignacio/400/500', type: 'mesa' },
+  { id: 'm3', name: 'Franchesca Crisóstomo', role: 'Secretaria General', major: 'secretariageneral.fepucv@gmail.com', image: 'https://picsum.photos/seed/camila/400/500', type: 'mesa' },
+  { id: 'm4', name: 'Vincent Muñoz', role: 'Secretaria de Finanzas', major: 'fepucvfinanzas@gmail.com', image: 'https://picsum.photos/seed/mateo/400/500', type: 'mesa' },
+  { id: 'm5', name: 'Romina Farías', role: 'Secretaria de Bienestar y Extensión', major: 'secretaria.bienestar.fepucv@gmail.com', image: 'https://picsum.photos/seed/valentina/400/500', type: 'mesa' },
+  { id: 'm6', name: 'Krishna Marambio', role: 'Secretaria de Comunicaciones', major: 'comunicaciones.fepucv@gmail.com', image: 'https://picsum.photos/seed/diego/400/500', type: 'mesa' },
   
   // CONSEJERÍA SUPERIOR (Solo 2)
   { id: 's1', name: 'Carolina Paz', role: 'Consejera Superior', major: 'Arquitectura', image: 'https://picsum.photos/seed/cs1/400/500', type: 'superior' },
