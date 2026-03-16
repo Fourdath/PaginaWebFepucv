@@ -1,76 +1,99 @@
-
-import React, { useState } from 'react';
-import { DOCUMENTS } from '../constants';
+import React, { useMemo, useState } from "react";
+import { documentosDocs } from "./lib/sheetsDocs";
 
 export const RegulationsPage: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredDocs = DOCUMENTS.filter(doc => 
-    doc.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredDocs = useMemo(() => {
+    return documentosDocs.filter((doc) =>
+      doc.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm]);
 
   return (
-    <div className="bg-white min-h-screen py-20">
+    <div className="bg-fepucv-primary/10 min-h-screen py-20">
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16">
-          <h1 className="text-4xl font-bold text-fepucv-primary mb-4">Reglamentos y Biblioteca</h1>
-          <p className="text-fepucv-textSecondary text-lg">Consulta la normativa vigente de nuestra federación y universidad.</p>
+        <div className="text-center mb-14">
+          <h1 className="text-3xl md:text-4xl font-bold text-fepucv-secondary mb-4">
+            Documentos
+          </h1>
+          <p className="text-fepucv-textSecondary max-w-2xl mx-auto">
+            Revisa estatutos, reglamentos, manuales y otros documentos oficiales
+            de la federación.
+          </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="mb-12">
-          <div className="relative max-w-xl">
-            <input 
-              type="text" 
-              placeholder="Buscar documento por nombre..." 
+        <div className="mb-12 flex justify-center">
+          <div className="w-full max-w-2xl">
+            <input
+              type="text"
+              placeholder="Buscar documento por nombre..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 bg-fepucv-surface rounded-fepucv border border-fepucv-border focus:ring-2 focus:ring-fepucv-primary focus:outline-none"
+              className="w-full px-6 py-4 bg-white rounded-fepucv border border-fepucv-border focus:ring-2 focus:ring-fepucv-primary focus:outline-none shadow-sm"
             />
           </div>
         </div>
 
-        <div className="overflow-hidden bg-white border border-fepucv-border rounded-fepucv shadow-sm">
-          <table className="min-w-full divide-y divide-fepucv-border">
-            <thead className="bg-fepucv-surface">
-              <tr>
-                <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-fepucv-primary uppercase tracking-wider">Documento</th>
-                <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-fepucv-primary uppercase tracking-wider">Categoría</th>
-                <th scope="col" className="px-6 py-4 text-left text-xs font-bold text-fepucv-primary uppercase tracking-wider">Año</th>
-                <th scope="col" className="px-6 py-4 text-right text-xs font-bold text-fepucv-primary uppercase tracking-wider">Acción</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-fepucv-border">
-              {filteredDocs.map((doc) => (
-                <tr key={doc.id} className="hover:bg-fepucv-surface transition-colors group">
-                  <td className="px-6 py-5 whitespace-nowrap">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">📄</span>
-                      <span className="font-bold text-fepucv-secondary">{doc.name}</span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-5 whitespace-nowrap">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-fepucv-textSecondary">
-                      {doc.category}
-                    </span>
-                  </td>
-                  <td className="px-6 py-5 whitespace-nowrap text-sm text-fepucv-textSecondary">
-                    {doc.year}
-                  </td>
-                  <td className="px-6 py-5 whitespace-nowrap text-right">
-                    <a 
-                      href={doc.url} 
-                      className="inline-flex items-center gap-2 bg-fepucv-primary text-white px-5 py-2 rounded-fepucv text-xs font-bold hover:bg-fepucv-light transition-all"
+        {filteredDocs.length === 0 ? (
+          <div className="bg-white border border-fepucv-border rounded-fepucv shadow-sm p-10 text-center">
+            <p className="text-fepucv-textSecondary">
+              No se encontraron documentos con ese nombre.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {filteredDocs.map((doc) => {
+              const href = doc.embedUrl || doc.downloadUrl || "#";
+              const disabled = href === "#";
+              const label = (doc.type || "DOC").toUpperCase();
+
+              return (
+                <div
+                  key={doc.key}
+                  className="bg-white p-8 rounded-fepucv border border-fepucv-border flex flex-col items-center text-center hover:shadow-xl transition-all shadow-sm"
+                >
+                  <div className="w-16 h-16 bg-fepucv-primary/20 rounded-full flex items-center justify-center text-2xl mb-6">
+                    📄
+                  </div>
+
+                  <h4 className="font-bold text-fepucv-secondary mb-6 flex-grow text-xl leading-snug">
+                    {doc.title}
+                  </h4>
+
+                  <a
+                    href={href}
+                    target={disabled ? undefined : "_blank"}
+                    rel={disabled ? undefined : "noreferrer"}
+                    onClick={(e) => {
+                      if (disabled) e.preventDefault();
+                    }}
+                    className={`w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2 ${
+                      disabled
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "bg-fepucv-secondary text-white hover:bg-fepucv-secondary/80"
+                    }`}
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                      Descargar PDF
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      />
+                    </svg>
+                    Ver / Descargar {label}
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

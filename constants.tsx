@@ -51,26 +51,138 @@ export const INITIAL_NEWS: NewsItem[] = [
 
 export const EXECUTIVE_BOARD: ExecutiveMember[] = [
   // MESA EJECUTIVA
-  { id: 'm1', name: 'Valeria Aguilera', role: 'Presidente', major: 'presidencia.fepucv@gmail.com', image: 'https://picsum.photos/seed/sofia/400/500', type: 'mesa' },
-  { id: 'm2', name: 'Mirko Peña', role: 'Vicepresidente', major: 'vicepresidencia.fepucv@gmail.com', image: 'https://picsum.photos/seed/ignacio/400/500', type: 'mesa' },
-  { id: 'm3', name: 'Franchesca Crisóstomo', role: 'Secretaria General', major: 'secretariageneral.fepucv@gmail.com', image: 'https://picsum.photos/seed/camila/400/500', type: 'mesa' },
-  { id: 'm4', name: 'Vincent Muñoz', role: 'Secretaria de Finanzas', major: 'fepucvfinanzas@gmail.com', image: 'https://picsum.photos/seed/mateo/400/500', type: 'mesa' },
-  { id: 'm5', name: 'Romina Farías', role: 'Secretaria de Bienestar y Extensión', major: 'secretaria.bienestar.fepucv@gmail.com', image: 'https://picsum.photos/seed/valentina/400/500', type: 'mesa' },
-  { id: 'm6', name: 'Krishna Marambio', role: 'Secretaria de Comunicaciones', major: 'comunicaciones.fepucv@gmail.com', image: 'https://picsum.photos/seed/diego/400/500', type: 'mesa' },
-  
-  // CONSEJERÍA SUPERIOR (Solo 2)
-  { id: 's1', name: 'Carolina Paz', role: 'Consejera Superior', major: 'Arquitectura', image: 'https://picsum.photos/seed/cs1/400/500', type: 'superior' },
-  { id: 's2', name: 'Benjamín Vicuña', role: 'Consejero Superior', major: 'Ingeniería Civil Informática', image: 'https://picsum.photos/seed/cs2/400/500', type: 'superior' },
+  {
+    id: 'm1',
+    name: 'Valeria Aguilera',
+    role: 'Presidente',
+    major: 'presidencia.fepucv@gmail.com',
+    image: '/img/mesa/valeria_aguilera.jpg',
+    type: 'mesa'
+  },
+  {
+    id: 'm2',
+    name: 'Mirko Peña',
+    role: 'Vicepresidente',
+    major: 'vicepresidencia.fepucv@gmail.com',
+    image: '/img/mesa/mirko_pena.jpg',
+    type: 'mesa'
+  },
+  {
+    id: 'm3',
+    name: 'Francesca Crisóstomo',
+    role: 'Secretaria General',
+    major: 'secretariageneral.fepucv@gmail.com',
+    image: '/img/mesa/francesca_crisostomo.jpg',
+    type: 'mesa'
+  },
+  {
+    id: 'm4',
+    name: 'Vincent Muñoz',
+    role: 'Secretaria de Finanzas',
+    major: 'fepucvfinanzas@gmail.com',
+    image: '/img/mesa/vincent_munos.JPG',
+    type: 'mesa'
+  },
+  {
+    id: 'm5',
+    name: 'Romina Farías',
+    role: 'Secretaria de Bienestar y Extensión',
+    major: 'secretaria.bienestar.fepucv@gmail.com',
+    image: '/img/mesa/romina_farias.jpg',
+    type: 'mesa'
+  },
+  {
+    id: 'm6',
+    name: 'Krishna Marambio',
+    role: 'Secretaria de Comunicaciones',
+    major: 'comunicaciones.fepucv@gmail.com',
+    image: '/img/mesa/krishna_marambio.jpg',
+    type: 'mesa'
+  },
+
+  // CONSEJERÍA SUPERIOR
+  {
+    id: 's1',
+    name: 'Vittore Tapia Larrañaga',
+    role: 'Consejera Superior',
+    major: 'Derecho',
+    image: 'https://picsum.photos/seed/cs1/400/500',
+    type: 'superior'
+  },
+  {
+    id: 's2',
+    name: 'Matías Cataldo Urbina',
+    role: 'Consejero Superior',
+    major: 'Pedagogía en Historia',
+    image: 'https://picsum.photos/seed/cs2/400/500',
+    type: 'superior'
+  },
 
   // CONSEJERÍAS DE FACULTAD
-  { id: 'f1', name: 'Matías Prado', role: 'Consejero Facultad Ingeniería', major: 'Ingeniería Civil', image: 'https://picsum.photos/seed/cf1/400/500', type: 'facultad' },
-  { id: 'f2', name: 'Lucía Méndez', role: 'Consejera Facultad Ciencias', major: 'Biología', image: 'https://picsum.photos/seed/cf2/400/500', type: 'facultad' },
-  { id: 'f3', name: 'Andrés Bello', role: 'Consejero Facultad Filosofía', major: 'Filosofía', image: 'https://picsum.photos/seed/cf3/400/500', type: 'facultad' },
-  { id: 'f4', name: 'Paula Jara', role: 'Consejera Facultad Agronomía', major: 'Agronomía', image: 'https://picsum.photos/seed/cf4/400/500', type: 'facultad' },
-  { id: 'f5', name: 'Esteban Quito', role: 'Consejero Facultad Derecho', major: 'Derecho', image: 'https://picsum.photos/seed/cf5/400/500', type: 'facultad' },
-  { id: 'f6', name: 'Rosa Espinoza', role: 'Consejera Facultad FACEA', major: 'Ing. Comercial', image: 'https://picsum.photos/seed/cf6/400/500', type: 'facultad' },
-  { id: 'f7', name: 'Javiera Paz', role: 'Consejera Facultad Educación', major: 'Pedagogía', image: 'https://picsum.photos/seed/cf7/400/500', type: 'facultad' },
-  { id: 'f8', name: 'Tomas Perez', role: 'Consejero Facultad Teología', major: 'Teología', image: 'https://picsum.photos/seed/cf8/400/500', type: 'facultad' },
+  {
+    id: 'f1',
+    name: 'Matías Prado',
+    role: 'Consejero Facultad Ingeniería',
+    major: 'Ingeniería Civil en Ciencias de Datos',
+    image: '/img/facultades/matias_prado.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f2',
+    name: 'Benjamín Padilla',
+    role: 'Consejero Facultad Ciencias',
+    major: 'Derecho',
+    image: '/img/facultades/benjamin_padilla.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f3',
+    name: 'María Sofía Alvarez',
+    role: 'Consejera Facultad Arquitectura',
+    major: 'María Sofía Alvarez',
+    image: 'https://picsum.photos/seed/cf3/400/500',
+    type: 'facultad'
+  },
+  {
+    id: 'f4',
+    name: 'Ainhoa Mancilla',
+    role: 'Consejera Facultad FACEA',
+    major: 'Trabajo Social',
+    image: '/img/facultades/ainhoa_mancilla.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f5',
+    name: 'Camila Ojeda Crisosto',
+    role: 'Consejera Facultad Filosofía y Educación',
+    major: 'Pedagogía en Historia, Geografía y Ciencias Sociales',
+    image: 'https://picsum.photos/seed/cf5/400/500',
+    type: 'facultad'
+  },
+  {
+    id: 'f6',
+    name: 'Scarlet Contreras',
+    role: 'Consejera Facultad Ingeniería',
+    major: 'Ingeniería Civil Bioquímica',
+    image: 'https://picsum.photos/seed/cf6/400/500',
+    type: 'facultad'
+  },
+  {
+    id: 'f7',
+    name: 'Felipe Armijo',
+    role: 'Consejero Facultad Filosofía y Educación',
+    major: 'Pedagogía en Educación Física',
+    image: 'https://picsum.photos/seed/cf7/400/500',
+    type: 'facultad'
+  },
+  {
+    id: 'f8',
+    name: 'Gesenia',
+    role: 'Consejera Facultad Ciencias',
+    major: 'Química Industrial',
+    image: 'https://picsum.photos/seed/cf8/400/500',
+    type: 'facultad'
+  },
 ];
 
 export const SERVICES: ServiceItem[] = [
@@ -97,19 +209,32 @@ export const FAQS: FAQItem[] = [
 ];
 
 export const FACULTIES: Faculty[] = [
-  {
-    id: '1',
-    name: 'Filosofía y Educación',
-    shortName: 'FIL ED',
-    slug: 'fil-ed',
-    icon: '📚',
-    representatives: [
-      { name: 'Ana García', role: 'Presidenta', email: 'ana.garcia@pucv.cl', image: 'https://picsum.photos/seed/ana/200/200' },
-      { name: 'Luis Torres', role: 'Secretario', email: 'luis.torres@pucv.cl', image: 'https://picsum.photos/seed/luis/200/200' },
-    ],
-    careers: ['Pedagogía en Historia', 'Pedagogía en Castellano', 'Filosofía', 'Educación Parvularia'],
-    instagram: '@fepucv_filed'
-  },
+{
+  id: '1',
+  name: 'Filosofía y Educación',
+  shortName: 'FIL ED',
+  slug: 'fil-ed',
+  icon: '📚',
+  representatives: [
+    {
+      name: 'Camila Ojeda Crisosto',
+      role: 'Representante',
+      email: 'pendiente@pucv.cl',
+      image: 'https://picsum.photos/seed/camila-filed/200/200'
+    },
+    {
+      name: 'Felipe Armijo',
+      role: 'Representante',
+      email: 'pendiente@pucv.cl',
+      image: 'https://picsum.photos/seed/felipe-filed/200/200'
+    },
+  ],
+  careers: [
+    'Pedagogía en Historia, Geografía y Ciencias Sociales',
+    'Pedagogía en Educación Física'
+  ],
+  instagram: '@fepucv_filed'
+},
   {
     id: '2',
     name: 'Agronomía',
@@ -122,18 +247,23 @@ export const FACULTIES: Faculty[] = [
     careers: ['Agronomía'],
     instagram: '@agronomia_pucv'
   },
-  {
-    id: '3',
-    name: 'Arquitectura y Diseño',
-    shortName: 'ARQUITECTURA',
-    slug: 'arquitectura',
-    icon: '📐',
-    representatives: [
-      { name: 'Carla Ruiz', role: 'Presidenta', email: 'carla.ruiz@pucv.cl', image: 'https://picsum.photos/seed/carla/200/200' },
-    ],
-    careers: ['Arquitectura', 'Diseño Gráfico', 'Diseño Industrial'],
-    instagram: '@eadpucv'
-  },
+{
+  id: '3',
+  name: 'Arquitectura y Diseño',
+  shortName: 'ARQUITECTURA',
+  slug: 'arquitectura',
+  icon: '📐',
+  representatives: [
+    {
+      name: 'María Sofía Alvarez',
+      role: 'Representante',
+      email: 'pendiente@pucv.cl',
+      image: 'https://picsum.photos/seed/maria-sofia/200/200'
+    },
+  ],
+  careers: ['Arquitectura', 'Diseño Gráfico', 'Diseño Industrial'],
+  instagram: '@eadpucv'
+},
   {
     id: '4',
     name: 'Derecho',
@@ -146,32 +276,79 @@ export const FACULTIES: Faculty[] = [
     careers: ['Derecho'],
     instagram: '@derechopucv'
   },
-  {
-    id: '5',
-    name: 'Ciencias Económicas y Administrativas',
-    shortName: 'FACEA',
-    slug: 'facea',
-    icon: '📊',
-    representatives: [
-      { name: 'Roberto Díaz', role: 'Presidente', email: 'roberto.diaz@pucv.cl', image: 'https://picsum.photos/seed/roberto/200/200' },
-    ],
-    careers: ['Ingeniería Comercial', 'Contador Auditor', 'Ingeniería de Ejecución en Administración de Negocios'],
-    instagram: '@faceapucv'
-  },
-  {
-    id: '6',
-    name: 'Ingeniería',
-    shortName: 'INGENIERÍA',
-    slug: 'ingenieria',
-    icon: '⚙️',
-    representatives: [
-      { name: 'Matías Prado', role: 'Presidente', email: 'matias.prado@pucv.cl', image: 'https://picsum.photos/seed/matias/200/200' },
-      { name: 'Scarlet Contreras', role: 'Vicepresidenta', email: 'scarlet.c@pucv.cl', image: 'https://picsum.photos/seed/scarlet/200/200' },
-      { name: 'José Morales', role: 'Secretario', email: 'jose.morales@pucv.cl', image: 'https://picsum.photos/seed/jose/200/200' },
-    ],
-    careers: ['Ing. Civil Informática', 'Ing. Civil Industrial', 'Ing. Civil Química', 'Ing. Civil Eléctrica', 'Ing. Civil Mecánica', 'Ing. Civil Bioquímica'],
-    instagram: '@fingpucv'
-  },
+{
+  id: '5',
+  name: 'Ciencias Económicas y Administrativas',
+  shortName: 'FACEA',
+  slug: 'facea',
+  icon: '📊',
+  representatives: [
+    {
+      name: 'Ainhoa Mancilla',
+      role: 'Representante',
+      email: 'pendiente@pucv.cl',
+      image: '/img/facultades/ainhoa_mancilla.jpg'
+    },
+    {
+      name: 'Anto Andrade Rojas',
+      role: 'Representante',
+      email: 'pendiente@pucv.cl',
+      image: 'https://picsum.photos/seed/anto-facea/200/200'
+    },
+    {
+      name: 'Sofía Venegas',
+      role: 'Representante',
+      email: 'pendiente@pucv.cl',
+      image: 'https://picsum.photos/seed/sofia-facea/200/200'
+    },
+  ],
+  careers: [
+    'Trabajo Social',
+    'Periodismo',
+    'Ingeniería Comercial',
+    'Contador Auditor',
+    'Ingeniería de Ejecución en Administración de Negocios'
+  ],
+  instagram: '@faceapucv'
+},
+{
+  id: '6',
+  name: 'Ingeniería',
+  shortName: 'INGENIERÍA',
+  slug: 'ingenieria',
+  icon: '⚙️',
+  representatives: [
+    {
+      name: 'Matías Prado',
+      role: 'Presidente',
+      email: 'matias.prado@pucv.cl',
+      image: '/img/facultades/matias_prado.jpg'
+    },
+    {
+      name: 'Scarlet Contreras',
+      role: 'Vicepresidenta',
+      email: 'scarlet.c@pucv.cl',
+      image: 'https://picsum.photos/seed/scarlet/200/200'
+    },
+    {
+      name: 'José Antonio Morales',
+      role: 'Secretario',
+      email: 'jose.morales@pucv.cl',
+      image: 'https://picsum.photos/seed/jose/200/200'
+    },
+  ],
+  careers: [
+    'Ingeniería Civil en Ciencias de Datos',
+    'Ingeniería Civil Metalúrgica',
+    'Ingeniería Civil Bioquímica',
+    'Ing. Civil Informática',
+    'Ing. Civil Industrial',
+    'Ing. Civil Química',
+    'Ing. Civil Eléctrica',
+    'Ing. Civil Mecánica'
+  ],
+  instagram: '@fingpucv'
+},
   {
     id: '7',
     name: 'Religión / Teología',

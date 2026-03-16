@@ -9,9 +9,9 @@ export const Header: React.FC = () => {
   const navLinks = [
     { name: 'Inicio', path: '/' },
     { name: 'Facultades', path: '/facultades' },
-    { name: 'Noticias', path: '/noticias' },
-    { name: 'Servicios', path: '/servicios' },
-    { name: 'Reglamentos', path: '/reglamentos' },
+    //{ name: 'Noticias', path: '/noticias' },
+    { name: 'Consejería Superior', path: '/consejeria-superior' },
+    { name: 'Documentos', path: '/reglamentos' },
     { name: 'Transparencia', path: '/transparencia' },
     { name: 'Nosotros', path: '/quienes-somos' },
   ];
@@ -24,8 +24,12 @@ export const Header: React.FC = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-fepucv-primary rounded-full flex items-center justify-center text-fepucv-secondary font-bold text-xl shadow-inner">
-              F
+            <div className="w-14 h-14 rounded-full overflow-hidden bg-white shadow-inner flex items-center justify-center text-fepucv-secondary font-bold text-lg">
+              <img
+                src="/img/logo/logo.jpg"
+                alt="Logo FEPUCV"
+                className="w-full h-full object-cover"
+              /> 
             </div>
             <div>
               <span className="block text-xl font-bold text-fepucv-secondary leading-none tracking-tight">FEPUCV</span>

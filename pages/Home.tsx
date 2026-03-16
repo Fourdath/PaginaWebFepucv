@@ -1,8 +1,8 @@
-
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NewsItem, ExecutiveMember } from '../types';
-import { EXECUTIVE_BOARD, SERVICES } from '../constants';
+import { EXECUTIVE_BOARD } from '../constants';
+import { fondosDocs } from './lib/sheetsDocs';
 
 interface HomeProps {
   news: NewsItem[];
@@ -67,8 +67,7 @@ const FacultadCard: React.FC<{ member: ExecutiveMember }> = ({ member }) => (
   </div>
 );
 
-export const Home: React.FC<HomeProps> = ({ news }) => {
-  const latestNews = news.slice(0, 4);
+export const Home: React.FC<HomeProps> = ({ news: _news }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
 
@@ -95,9 +94,9 @@ export const Home: React.FC<HomeProps> = ({ news }) => {
       <section className="relative h-[600px] flex items-center bg-fepucv-secondary overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://picsum.photos/seed/hero/1920/1080?grayscale" 
+            src="/img/universidad/universidad.jpeg"
             className="w-full h-full object-cover opacity-20"
-            alt="PUCV Background"
+            alt="Universidad PUCV"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-fepucv-secondary via-transparent to-transparent"></div>
         </div>
@@ -210,66 +209,46 @@ export const Home: React.FC<HomeProps> = ({ news }) => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Bases Fondos Participativos", format: "PDF", link: "#" },
-              { title: "Formulario Fondos Descentralizados 2025", format: "DOCX", link: "#" },
-              { title: "Formulario Fondos Participativos 2025", format: "DOCX", link: "#" }
-            ].map((doc, idx) => (
-              <div key={idx} className="bg-white p-8 rounded-fepucv border border-fepucv-border flex flex-col items-center text-center hover:shadow-xl transition-all shadow-sm">
-                <div className="w-16 h-16 bg-fepucv-primary/20 rounded-full flex items-center justify-center text-2xl mb-6">📄</div>
-                <h4 className="font-bold text-fepucv-secondary mb-6 flex-grow">{doc.title}</h4>
-                <a 
-                  href={doc.link} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="w-full bg-fepucv-secondary text-white py-3 rounded-full font-bold text-sm hover:bg-fepucv-secondary/80 transition-all flex items-center justify-center gap-2"
+            {fondosDocs.map((doc) => {
+              const href = doc.embedUrl || doc.downloadUrl || "#";
+              const disabled = href === "#";
+
+              const label = (doc.type || "DOC").toUpperCase();
+
+              return (
+                <div
+                  key={doc.key}
+                  className="bg-white p-8 rounded-fepucv border border-fepucv-border flex flex-col items-center text-center hover:shadow-xl transition-all shadow-sm"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                  Descargar {doc.format}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Noticias Destacadas */}
-      <section className="py-24 bg-fepucv-surface">
-        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-end mb-12">
-          <div>
-            <h2 className="text-3xl font-bold text-fepucv-secondary mb-2">Noticias Destacadas</h2>
-            <div className="w-20 h-1.5 bg-fepucv-primary rounded-full"></div>
-          </div>
-          <Link to="/noticias" className="hidden sm:block text-fepucv-secondary font-bold hover:text-fepucv-primary transition-colors">
-            Ver todas las noticias →
-          </Link>
-        </div>
-
-        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {latestNews.map((item) => (
-              <div key={item.id} className="bg-white rounded-fepucv border border-fepucv-border overflow-hidden flex flex-col hover:shadow-lg transition-shadow">
-                <div className="relative aspect-video overflow-hidden">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                  <span className="absolute top-3 left-3 bg-fepucv-primary text-fepucv-secondary text-[10px] font-bold px-3 py-1 rounded-full uppercase shadow-sm">
-                    {item.category}
-                  </span>
-                </div>
-                <div className="p-5 flex-grow flex flex-col">
-                  <p className="text-xs text-fepucv-textSecondary mb-2 font-medium">{item.date}</p>
-                  <h3 className="font-bold text-fepucv-text mb-3 line-clamp-2 leading-snug">{item.title}</h3>
-                  <p className="text-sm text-fepucv-textSecondary mb-6 line-clamp-3 leading-relaxed">{item.excerpt}</p>
-                  <div className="mt-auto">
-                    <Link 
-                      to={`/noticias/${item.slug}`} 
-                      className="inline-block text-fepucv-secondary font-bold text-sm border-b-2 border-fepucv-primary hover:bg-fepucv-primary/10 transition-all px-1"
-                    >
-                      VER MÁS
-                    </Link>
+                  <div className="w-16 h-16 bg-fepucv-primary/20 rounded-full flex items-center justify-center text-2xl mb-6">
+                    📄
                   </div>
+
+                  <h4 className="font-bold text-fepucv-secondary mb-6 flex-grow">
+                    {doc.title}
+                  </h4>
+
+                  <a
+                    href={href}
+                    target={disabled ? undefined : "_blank"}
+                    rel={disabled ? undefined : "noreferrer"}
+                    onClick={(e) => {
+                      if (disabled) e.preventDefault();
+                    }}
+                    className={`w-full py-3 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2 ${
+                      disabled
+                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        : "bg-fepucv-secondary text-white hover:bg-fepucv-secondary/80"
+                    }`}
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Ver / Descargar {label}
+                  </a>
                 </div>
-              </div>
-            ))}
+              );
+            })}  
           </div>
         </div>
       </section>
