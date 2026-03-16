@@ -13,12 +13,10 @@ import { ContactPage } from "./pages/ContactPage";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { FacultiesPage } from "./pages/FacultiesPage";
 import { FacultyDetail } from "./pages/FacultyDetail";
-import { LoginPage } from "./pages/LoginPage";
 
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 
-import ProtectedRoute from "./routes/ProtectedRoute";
 import { NewsItem } from "./types";
 import { INITIAL_NEWS } from "./constants";
 
@@ -62,18 +60,8 @@ const App: React.FC = () => {
             <Route path="facultades" element={<FacultiesPage />} />
             <Route path="facultades/:slug" element={<FacultyDetail />} />
 
-            <Route path="login" element={<LoginPage />} />
+            <Route path="admin" element={<AdminDashboard onAddNews={handleAddNews} />} />
 
-            <Route
-              path="admin"
-              element={
-                <ProtectedRoute>
-                  <AdminDashboard onAddNews={handleAddNews} />
-                </ProtectedRoute>
-              }
-            />
-
-            {/* Nunca quedes en blanco */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
