@@ -84,7 +84,7 @@ const AsistenteChat: React.FC = () => {
     setMensajes([
       {
         rol: 'asistente',
-        texto: '¡Hola! Soy el asistente virtual de la FEPUCV 👋\n\nPuedo responder preguntas sobre los reglamentos, estatutos y documentos oficiales. ¿En qué te puedo ayudar?'
+        texto: '¡Hola! Soy el asistente virtual de la FEPUCV, basado en inteligencia artificial 👋\n\nPuedo ayudarte a responder preguntas sobre reglamentos, estatutos y documentos oficiales. Ten en cuenta que, aunque busco orientarte de la mejor manera posible, puedo cometer errores, por lo que siempre es importante revisar los documentos oficiales ante dudas relevantes. ¿En qué te puedo ayudar?'
       }
     ]);
 
