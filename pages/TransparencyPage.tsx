@@ -1,16 +1,17 @@
+// src/pages/TransparencyPage.tsx — con sección de análisis de gastos integrada
+
 import React from 'react';
 import { transparenciaDocs } from './lib/sheetsDocs';
+import { GastosCharts } from '../components/GastosCharts';
 
 export const TransparencyPage: React.FC = () => {
   const getDescription = (title: string) => {
     if (title.toLowerCase().includes('actas')) {
       return 'Accede al historial completo de actas plenarias registradas oficialmente.';
     }
-
     if (title.toLowerCase().includes('rendiciones')) {
       return 'Accede al historial completo de rendiciones financieras registradas oficialmente.';
     }
-
     return 'Accede al repositorio oficial de documentos de transparencia.';
   };
 
@@ -23,6 +24,8 @@ export const TransparencyPage: React.FC = () => {
   return (
     <div className="bg-white min-h-screen py-20">
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Encabezado ── */}
         <div className="max-w-3xl mb-16">
           <h1 className="text-4xl font-bold text-fepucv-primary mb-6">
             Portal de Transparencia
@@ -34,20 +37,18 @@ export const TransparencyPage: React.FC = () => {
           </p>
         </div>
 
+        {/* ── Tarjetas de carpetas Drive ── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {transparenciaDocs.map((sec) => {
             const href = sec.embedUrl || sec.downloadUrl || '#';
             const disabled = href === '#';
-
             return (
               <a
                 key={sec.key}
                 href={href}
                 target={disabled ? undefined : '_blank'}
                 rel={disabled ? undefined : 'noreferrer'}
-                onClick={(e) => {
-                  if (disabled) e.preventDefault();
-                }}
+                onClick={(e) => { if (disabled) e.preventDefault(); }}
                 className={`bg-fepucv-surface p-10 rounded-fepucv border border-fepucv-border transition-all group block ${
                   disabled
                     ? 'opacity-60 cursor-not-allowed'
@@ -62,15 +63,12 @@ export const TransparencyPage: React.FC = () => {
                     Actualización mensual
                   </span>
                 </div>
-
                 <h3 className="text-2xl font-bold text-fepucv-secondary mb-4">
                   {sec.title}
                 </h3>
-
                 <p className="text-fepucv-textSecondary mb-8 text-sm">
                   {getDescription(sec.title)}
                 </p>
-
                 <span className="text-fepucv-primary font-bold flex items-center gap-2 group-hover:underline">
                   Explorar carpeta →
                 </span>
@@ -79,7 +77,11 @@ export const TransparencyPage: React.FC = () => {
           })}
         </div>
 
-        <div className="bg-fepucv-secondary p-12 rounded-fepucv text-white">
+        {/* ── ANÁLISIS DE GASTOS (nuevo) ── */}
+        <GastosCharts />
+
+        {/* ── Política de Probidad ── */}
+        <div className="bg-fepucv-secondary p-12 rounded-fepucv text-white mt-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-bold mb-6">Política de Probidad</h2>
@@ -97,7 +99,6 @@ export const TransparencyPage: React.FC = () => {
                 </span>
               </div>
             </div>
-
             <div className="flex justify-center">
               <div className="w-32 h-32 border-4 border-fepucv-light rounded-full flex items-center justify-center text-3xl font-bold">
                 100%
@@ -105,6 +106,7 @@ export const TransparencyPage: React.FC = () => {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );
