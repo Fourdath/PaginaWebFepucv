@@ -16,6 +16,7 @@ import { FacultyDetail } from "./pages/FacultyDetail";
 
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { AsistenteChat } from "./components/AsistenteChat"; // <- agregar esto
 
 import { NewsItem } from "./types";
 import { INITIAL_NEWS } from "./constants";
@@ -47,10 +48,8 @@ const App: React.FC = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home news={news} />} />
-
             <Route path="noticias" element={<NewsList news={news} />} />
             <Route path="noticias/:slug" element={<NewsDetail news={news} />} />
-
             <Route path="consejeria-superior" element={<ConsejeriaSuperiorPage />} />
             <Route path="reglamentos" element={<RegulationsPage />} />
             <Route path="transparencia" element={<TransparencyPage />} />
@@ -59,12 +58,12 @@ const App: React.FC = () => {
             <Route path="contacto" element={<ContactPage />} />
             <Route path="facultades" element={<FacultiesPage />} />
             <Route path="facultades/:slug" element={<FacultyDetail />} />
-
             <Route path="admin" element={<AdminDashboard onAddNews={handleAddNews} />} />
-
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
+
+        <AsistenteChat /> {/* <- agregar aquí */}
 
         <Footer />
       </div>

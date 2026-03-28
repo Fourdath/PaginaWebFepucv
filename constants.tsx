@@ -105,7 +105,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Vittore Tapia Larrañaga',
     role: 'Consejera Superior',
     major: 'Derecho',
-    image: 'https://picsum.photos/seed/cs1/400/500',
+    image: '/img/consejeria/Vitore.jpg',
     type: 'superior'
   },
   {
@@ -118,87 +118,86 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
   },
 
   // CONSEJERÍAS DE FACULTAD
-// CONSEJERÍAS DE FACULTAD
-{
-  id: 'f1',
-  name: 'Matías Prado',
-  role: 'Consejero Facultad Ingeniería',
-  major: 'Ingeniería Civil en Ciencias de Datos',
-  image: '/img/facultades/matias_prado.jpg',
-  type: 'facultad'
-},
-{
-  id: 'f2',
-  name: 'Benjamín Padilla',
-  role: 'Consejero Facultad Derecho',
-  major: 'Derecho',
-  image: '/img/facultades/benjamin_padilla.jpg',
-  type: 'facultad'
-},
-{
-  id: 'f3',
-  name: 'Ainhoa Mancilla',
-  role: 'Consejera Facultad FACEA',
-  major: 'Trabajo Social',
-  image: '/img/facultades/ainhoa_mancilla.jpg',
-  type: 'facultad'
-},
-{
-  id: 'f4',
-  name: 'Camila Ojeda Crisosto',
-  role: 'Consejera Facultad Filosofía y Educación',
-  major: 'Pedagogía en Historia, Geografía y Ciencias Sociales',
-  image: 'https://picsum.photos/seed/cf5/400/500',
-  type: 'facultad'
-},
-{
-  id: 'f5',
-  name: 'Scarlet Contreras',
-  role: 'Consejera Facultad Ingeniería',
-  major: 'Ingeniería Civil Bioquímica',
-  image: 'https://picsum.photos/seed/cf6/400/500',
-  type: 'facultad'
-},
-{
-  id: 'f6',
-  name: 'Felipe Armijo',
-  role: 'Consejero Facultad Filosofía y Educación',
-  major: 'Pedagogía en Educación Física',
-  image: 'https://picsum.photos/seed/cf7/400/500',
-  type: 'facultad'
-},
-{
-  id: 'f7',
-  name: 'Juan Luis Tuells Araya',
-  role: 'Consejero Facultad Arquitectura y Diseño',
-  major: 'Arquitectura y Diseño',
-  image: 'https://picsum.photos/seed/juan-luis-tuells/400/500',
-  type: 'facultad'
-},
-{
-  id: 'f8',
-  name: 'Sofía Álvarez Bronfman',
-  role: 'Consejera Facultad Arquitectura y Diseño',
-  major: 'Arquitectura y Diseño',
-  image: 'https://picsum.photos/seed/sofia-alvarez-bronfman/400/500',
-  type: 'facultad'
-},
-{
-  id: 'f9',
-  name: 'Ethan Palma Martinez',
-  role: 'Consejero Facultad Ciencias',
-  major: 'Ciencias',
-  image: 'https://picsum.photos/seed/ethan-palma-martinez/400/500',
-  type: 'facultad'
-},
-{
-  id: 'f10',
-  name: 'Gesenia Bravo Guerrero',
-  role: 'Consejera Facultad Ciencias',
-  major: 'Ciencias',
-  image: 'https://picsum.photos/seed/gesenia-bravo-guerrero/400/500',
-  type: 'facultad'
-},
+  {
+    id: 'f1',
+    name: 'Matías Prado',
+    role: 'Consejero Facultad Ingeniería',
+    major: 'Ingeniería Civil en Ciencias de Datos',
+    image: '/img/facultades/matias_prado.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f2',
+    name: 'Benjamín Padilla',
+    role: 'Consejero Facultad Derecho',
+    major: 'Derecho',
+    image: '/img/facultades/benjamin_padilla.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f3',
+    name: 'Ainhoa Mancilla',
+    role: 'Consejera Facultad FACEA',
+    major: 'Trabajo Social',
+    image: '/img/facultades/ainhoa_mancilla.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f4',
+    name: 'Camila Ojeda Crisosto',
+    role: 'Consejera Facultad Filosofía y Educación',
+    major: 'Pedagogía en Historia, Geografía y Ciencias Sociales',
+    image: '/img/facultades/Camila_Ojeda_Crisosto.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f5',
+    name: 'Scarlet Contreras',
+    role: 'Consejera Facultad Ingeniería',
+    major: 'Ingeniería Civil Bioquímica',
+    image: '/img/facultades/Scarlet_Contreras.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f6',
+    name: 'Felipe Armijo',
+    role: 'Consejero Facultad Filosofía y Educación',
+    major: 'Pedagogía en Educación Física',
+    image: '/img/facultades/felipe_armijo.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f7',
+    name: 'Juan Luis Tuells Araya',
+    role: 'Consejero Facultad Arquitectura y Diseño',
+    major: 'Arquitectura y Diseño',
+    image: '/img/facultades/Juan_Tuells_Araya.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f8',
+    name: 'Sofía Álvarez Bronfman',
+    role: 'Consejera Facultad Arquitectura y Diseño',
+    major: 'Arquitectura y Diseño',
+    image: '/img/facultades/Sofia_Alvarez_Bronfman.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f9',
+    name: 'Ethan Palma Martinez',
+    role: 'Consejero Facultad Ciencias',
+    major: 'Ciencias',
+    image: '/img/facultades/Ethan_Palma_Martinez.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f10',
+    name: 'Gesenia Bravo Guerrero',
+    role: 'Consejera Facultad Ciencias',
+    major: 'Ciencias',
+    image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg',
+    type: 'facultad'
+  },
 ];
 
 export const SERVICES: ServiceItem[] = [
@@ -236,13 +235,13 @@ export const FACULTIES: Faculty[] = [
         name: 'Camila Ojeda Crisosto',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: '\img\facultades\Camila_Ojeda_Crisosto.jpeg'
+        image: '/img/facultades/Camila_Ojeda_Crisosto.jpeg'
       },
       {
         name: 'Felipe Armijo',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: 'https://picsum.photos/seed/felipe-armijo/200/200'
+        image: '/img/facultades/felipe_armijo.jpg'
       },
     ],
     careers: [
@@ -262,13 +261,13 @@ export const FACULTIES: Faculty[] = [
         name: 'Juan Luis Tuells Araya',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: 'https://picsum.photos/seed/juan-luis-tuells/200/200'
+        image: '/img/facultades/Juan_Tuells_Araya.jpeg'
       },
       {
         name: 'Sofía Álvarez Bronfman',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: 'https://picsum.photos/seed/sofia-alvarez-bronfman/200/200'
+        image: '/img/facultades/Sofia_Alvarez_Bronfman.jpeg'
       },
     ],
     careers: ['Arquitectura', 'Diseño Gráfico', 'Diseño Industrial'],
@@ -282,17 +281,17 @@ export const FACULTIES: Faculty[] = [
     icon: '⚖️',
     representatives: [
       {
+        name: 'Benjamín Padilla',
+        role: 'Representante',
+        email: 'pendiente@pucv.cl',
+        image: '/img/facultades/benjamin_padilla.jpg'
+      },
+      {
         name: 'Sofía Aguilera Varas',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: 'https://picsum.photos/seed/sofia-aguilera-varas/200/200'
+        image: '/img/facultades/Sofia_Aguilera_Varas.jpeg'
       },
-      {
-      name: 'Benjamín Padilla',
-      role: 'Representante',
-      email: 'pendiente@pucv.cl',
-      image: '/img/facultades/benjamin_padilla.jpg'
-    },
     ],
     careers: ['Derecho'],
     instagram: '@derechopucv'
@@ -310,7 +309,6 @@ export const FACULTIES: Faculty[] = [
         email: 'pendiente@pucv.cl',
         image: '/img/facultades/ainhoa_mancilla.jpg'
       },
-
     ],
     careers: [
       'Trabajo Social',
@@ -338,13 +336,13 @@ export const FACULTIES: Faculty[] = [
         name: 'Scarlet Contreras',
         role: 'Vicepresidenta',
         email: 'scarlet.c@pucv.cl',
-        image: 'https://picsum.photos/seed/scarlet/200/200'
+        image: '/img/facultades/Scarlet_Contreras.jpeg'
       },
       {
         name: 'José Antonio Morales',
         role: 'Secretario',
         email: 'jose.morales@pucv.cl',
-        image: 'https://picsum.photos/seed/jose/200/200'
+        image: '/img/facultades/Jose.jpeg'
       },
     ],
     careers: [
@@ -370,13 +368,13 @@ export const FACULTIES: Faculty[] = [
         name: 'Ethan Palma Martinez',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: 'https://picsum.photos/seed/ethan-palma-martinez/200/200'
+        image: '/img/facultades/Ethan_Palma_Martinez.jpeg'
       },
       {
         name: 'Gesenia Bravo Guerrero',
         role: 'Representante',
         email: 'pendiente@pucv.cl',
-        image: 'https://picsum.photos/seed/gesenia-bravo-guerrero/200/200'
+        image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg'
       },
     ],
     careers: ['Química Industrial', 'Biología', 'Química', 'Física', 'Matemáticas'],

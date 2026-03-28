@@ -25,7 +25,7 @@ export const ConsejeriaSuperiorPage: React.FC = () => {
         carrera: "Derecho (generación 2023)",
         bio:
           "Comprometido con una comunidad estudiantil justa, inclusiva y respetuosa, fortaleciendo la cercanía, transparencia y el bienestar integral del estudiantado.",
-        photo: "/img/consejeria/vittore-tapia.webp",
+        photo: "/img/consejeria/Vitore.jpg",
         links: {
           instagram: "https://www.instagram.com/humitascnazucar?igsh=NHVxNjR3Znhyb2kw",
           link: "https://www.instagram.com/consejeriasuperior.pucv?igsh=MWJkMTdzbXc5MWR4bw==",
