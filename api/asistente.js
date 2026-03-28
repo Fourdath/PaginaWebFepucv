@@ -171,7 +171,7 @@ No inventes información que no esté en los documentos.`;
       : [{ role: 'user', parts }];
 
     const geminiRes = await fetch(
-      `${GEMINI_BASE}/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `${GEMINI_BASE}/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
