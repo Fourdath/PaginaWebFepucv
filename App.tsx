@@ -16,7 +16,7 @@ import { FacultyDetail } from "./pages/FacultyDetail";
 
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { AsistenteChat } from "./components/AsistenteChat"; // <- agregar esto
+import AsistenteChat from "./components/AsistenteChat";
 
 import { NewsItem } from "./types";
 import { INITIAL_NEWS } from "./constants";
