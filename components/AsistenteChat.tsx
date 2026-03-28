@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface Mensaje {
   rol: 'usuario' | 'asistente';
@@ -15,7 +17,7 @@ const AsistenteChat: React.FC = () => {
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     {
       rol: 'asistente',
-      texto: '¡Hola! Soy el asistente virtual de la FEPUCV 👋\n\nPuedo responder preguntas sobre los reglamentos, estatutos y documentos oficiales. La primera consulta puede tardar unos segundos mientras cargo los documentos. ¿En qué te puedo ayudar?'
+      texto: 'Hola! Soy el asistente virtual de la FEPUCV, basado en inteligencia artificial 👋\n\nPuedo ayudarte a responder preguntas sobre reglamentos, estatutos y documentos oficiales. Ten en cuenta que, aunque busco orientarte de la mejor manera posible, puedo cometer errores, por lo que siempre es importante revisar los documentos oficiales ante dudas relevantes. ¿En qué te puedo ayudar?'
     }
   ]);
   const [input, setInput] = useState('');
@@ -146,17 +148,28 @@ const AsistenteChat: React.FC = () => {
             {mensajes.map((msg, i) => (
               <div key={i} className={`flex ${msg.rol === 'usuario' ? 'justify-end' : 'justify-start'}`}>
                 <div
-                  className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-line ${
+                  className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                     msg.rol === 'usuario'
                       ? 'bg-fepucv-secondary text-white rounded-br-sm'
                       : 'bg-white text-gray-800 border border-fepucv-border rounded-bl-sm shadow-sm'
                   }`}
                 >
-                  {msg.texto}
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                      ul: ({ children }) => <ul className="list-disc pl-5 mb-2 space-y-1">{children}</ul>,
+                      ol: ({ children }) => <ol className="list-decimal pl-5 mb-2 space-y-1">{children}</ol>,
+                      li: ({ children }) => <li>{children}</li>,
+                      strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                    }}
+                  >
+                    {msg.texto}
+                  </ReactMarkdown>
                 </div>
               </div>
             ))}
-
+            
             {cargando && (
               <div className="flex justify-start">
                 <div className="bg-white border border-fepucv-border rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1.5 items-center">
