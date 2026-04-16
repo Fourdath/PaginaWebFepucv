@@ -38,7 +38,7 @@ export const ConsejeriaSuperiorPage: React.FC = () => {
         carrera: "Pedagogía en Historia",
         bio:
           "Representación estudiantil con enfoque en participación, gestión y articulación con las distintas unidades académicas.",
-        photo: "/img/consejeria/matias-cataldo.webp",
+        photo: "/img/consejeria/Matias_Cataldo_Urbina.jpeg",
         links: {
           link: "https://www.instagram.com/consejeriasuperior.pucv?igsh=MWJkMTdzbXc5MWR4bw==",
         },

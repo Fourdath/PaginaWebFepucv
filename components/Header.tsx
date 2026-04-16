@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 export const Header: React.FC = () => {
@@ -14,6 +13,7 @@ export const Header: React.FC = () => {
     { name: 'Documentos', path: '/reglamentos' },
     { name: 'Transparencia', path: '/transparencia' },
     { name: 'Nosotros', path: '/quienes-somos' },
+    { name: 'Minijuegos', path: '/minijuegos' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -22,14 +22,13 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-50 bg-white border-b border-fepucv-border shadow-sm">
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <div className="w-14 h-14 rounded-full overflow-hidden bg-white shadow-inner flex items-center justify-center text-fepucv-secondary font-bold text-lg">
               <img
                 src="/img/logo/logo.jpg"
                 alt="Logo FEPUCV"
                 className="w-full h-full object-cover"
-              /> 
+              />
             </div>
             <div>
               <span className="block text-xl font-bold text-fepucv-secondary leading-none tracking-tight">FEPUCV</span>
@@ -37,15 +36,14 @@ export const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 className={`text-xs font-bold uppercase tracking-wider transition-colors ${
-                  isActive(link.path) 
-                    ? 'text-fepucv-secondary border-b-2 border-fepucv-primary pb-1' 
+                  isActive(link.path)
+                    ? 'text-fepucv-secondary border-b-2 border-fepucv-primary pb-1'
                     : 'text-fepucv-textSecondary hover:text-fepucv-secondary'
                 }`}
               >
@@ -60,7 +58,6 @@ export const Header: React.FC = () => {
             </Link>
           </nav>
 
-          {/* Mobile Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-fepucv-surface transition-colors"
@@ -76,7 +73,6 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-fepucv-border py-4 px-4 space-y-2">
           {navLinks.map((link) => (

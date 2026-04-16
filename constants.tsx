@@ -1,6 +1,16 @@
 import React from 'react';
 import { NewsItem, ExecutiveMember, ServiceItem, DocumentItem, FAQItem, Faculty } from './types';
 
+export const CHARACTERS = [
+  { id: 1, name: 'Francesca', role: 'Presidente', img: '/img/mesa/francesca_crisostomo.jpeg' },
+  { id: 2, name: 'Krishna', role: 'Vicepresidenta', img: '/img/mesa/krishna_marambio.jpeg' },
+  { id: 3, name: 'Mirko', role: 'Sec. General', img: '/img/mesa/mirko_pena.jpeg' },
+  { id: 4, name: 'Romina', role: 'Finanzas', img: '/img/mesa/romina_farias.jpeg' },
+  { id: 5, name: 'Valeria', role: 'Comunicaciones', img: '/img/mesa/valeria_aguilera.jpeg' },
+  { id: 6, name: 'Vincent', role: 'Deportes', img: '/img/mesa/vincent_munos.jpeg' },
+];
+
+
 export const INITIAL_NEWS: NewsItem[] = [
   {
     id: '1',
@@ -55,7 +65,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Valeria Aguilera',
     role: 'Presidente',
     major: 'presidencia.fepucv@gmail.com',
-    image: '/img/mesa/valeria_aguilera.jpg',
+    image: '/img/mesa/valeria_aguilera.jpeg',
     type: 'mesa'
   },
   {
@@ -63,7 +73,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Mirko Peña',
     role: 'Vicepresidente',
     major: 'vicepresidencia.fepucv@gmail.com',
-    image: '/img/mesa/mirko_pena.jpg',
+    image: '/img/mesa/mirko_pena.jpeg',
     type: 'mesa'
   },
   {
@@ -71,7 +81,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Francesca Crisóstomo',
     role: 'Secretaria General',
     major: 'secretariageneral.fepucv@gmail.com',
-    image: '/img/mesa/francesca_crisostomo.jpg',
+    image: '/img/mesa/francesca_crisostomo.jpeg',
     type: 'mesa'
   },
   {
@@ -79,7 +89,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Vincent Muñoz',
     role: 'Secretaria de Finanzas',
     major: 'fepucvfinanzas@gmail.com',
-    image: '/img/mesa/vincent_munos.JPG',
+    image: '/img/mesa/vincent_munos.jpeg',
     type: 'mesa'
   },
   {
@@ -87,7 +97,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Romina Farías',
     role: 'Secretaria de Bienestar y Extensión',
     major: 'secretaria.bienestar.fepucv@gmail.com',
-    image: '/img/mesa/romina_farias.jpg',
+    image: '/img/mesa/romina_farias.jpeg',
     type: 'mesa'
   },
   {
@@ -95,7 +105,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Krishna Marambio',
     role: 'Secretaria de Comunicaciones',
     major: 'comunicaciones.fepucv@gmail.com',
-    image: '/img/mesa/krishna_marambio.jpg',
+    image: '/img/mesa/krishna_marambio.jpeg',
     type: 'mesa'
   },
 
@@ -113,29 +123,61 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Matías Cataldo Urbina',
     role: 'Consejero Superior',
     major: 'Pedagogía en Historia',
-    image: 'https://picsum.photos/seed/cs2/400/500',
+    image: '/img/consejeria/Matias_Cataldo_Urbina.jpeg',
     type: 'superior'
   },
 
   // CONSEJERÍAS DE FACULTAD
   {
     id: 'f1',
-    name: 'Matías Prado',
-    role: 'Consejero Facultad Ingeniería',
-    major: 'Ingeniería Civil en Ciencias de Datos',
-    image: '/img/facultades/matias_prado.jpg',
+    name: 'Sofía Álvarez Brofman',
+    role: 'Consejera Facultad de Arquitectura y Urbanismo',
+    major: 'Licenciatura en Arte',
+    image: '/img/facultades/Sofia_Alvarez_Bronfman.jpeg',
     type: 'facultad'
   },
   {
     id: 'f2',
-    name: 'Benjamín Padilla',
-    role: 'Consejero Facultad Derecho',
-    major: 'Derecho',
-    image: '/img/facultades/benjamin_padilla.jpg',
+    name: 'Juan Luis Tuells Araya',
+    role: 'Consejero Facultad de Arquitectura y Urbanismo',
+    major: 'Arquitectura',
+    image: '/img/facultades/Juan_Tuells_Araya.jpeg',
     type: 'facultad'
   },
   {
     id: 'f3',
+    name: 'Yesenia Bravo Guerrero',
+    role: 'Consejera Facultad de Ciencias',
+    major: 'Química Industrial',
+    image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f4',
+    name: 'Ethan Palma Martines',
+    role: 'Consejero Facultad de Ciencias',
+    major: 'Licenciatura en Matemática',
+    image: '/img/facultades/Ethan_Palma_Martinez.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f5',
+    name: 'Joshua Diaz Galindo',
+    role: 'Consejero Facultad de Ciencias',
+    major: 'Licenciatura en Física',
+    image: '/img/facultades/Joshua_Diaz_Galindo.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f6',
+    name: 'Sofia Venegas',
+    role: 'Consejera Facultad FACEA',
+    major: 'Periodismo',
+    image: '/img/facultades/Sofia_venegas.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f7',
     name: 'Ainhoa Mancilla',
     role: 'Consejera Facultad FACEA',
     major: 'Trabajo Social',
@@ -143,59 +185,68 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     type: 'facultad'
   },
   {
-    id: 'f4',
-    name: 'Camila Ojeda Crisosto',
-    role: 'Consejera Facultad Filosofía y Educación',
+    id: 'f8',
+    name: 'Antonia Andrade',
+    role: 'Consejera Facultad FACEA',
+    major: 'Trabajo Social',
+    image: '',
+    type: 'facultad'
+  },
+
+  {
+    id: 'f10',
+    name: 'Benjamin Padilla Estadella',
+    role: 'Consejero Facultad de Derecho',
+    major: 'Derecho',
+    image: '/img/facultades/benjamin_padilla.jpg',
+    type: 'facultad'
+  },
+  {
+    id: 'f11',
+    name: 'Sofía Aguilera Varas',
+    role: 'Consejera Facultad de Derecho',
+    major: 'Derecho',
+    image: '/img/facultades/Sofia_Aguilera_Varas.jpeg',
+    type: 'facultad'
+  },
+  {
+    id: 'f12',
+    name: 'Camila Ojeda Crisisto',
+    role: 'Consejera Facultad de Filosofía y Educación',
     major: 'Pedagogía en Historia, Geografía y Ciencias Sociales',
     image: '/img/facultades/Camila_Ojeda_Crisosto.jpeg',
     type: 'facultad'
   },
   {
-    id: 'f5',
-    name: 'Scarlet Contreras',
-    role: 'Consejera Facultad Ingeniería',
-    major: 'Ingeniería Civil Bioquímica',
-    image: '/img/facultades/Scarlet_Contreras.jpeg',
-    type: 'facultad'
-  },
-  {
-    id: 'f6',
+    id: 'f13',
     name: 'Felipe Armijo',
-    role: 'Consejero Facultad Filosofía y Educación',
+    role: 'Consejero Facultad de Filosofía y Educación',
     major: 'Pedagogía en Educación Física',
     image: '/img/facultades/felipe_armijo.jpg',
     type: 'facultad'
   },
   {
-    id: 'f7',
-    name: 'Juan Luis Tuells Araya',
-    role: 'Consejero Facultad Arquitectura y Diseño',
-    major: 'Arquitectura y Diseño',
-    image: '/img/facultades/Juan_Tuells_Araya.jpeg',
+    id: 'f14',
+    name: 'José Morales Delgado',
+    role: 'Consejero Facultad de Ingeniería',
+    major: 'Ingeniería Civil Metalúrgica',
+    image: '/img/facultades/Jose.jpeg',
     type: 'facultad'
   },
   {
-    id: 'f8',
-    name: 'Sofía Álvarez Bronfman',
-    role: 'Consejera Facultad Arquitectura y Diseño',
-    major: 'Arquitectura y Diseño',
-    image: '/img/facultades/Sofia_Alvarez_Bronfman.jpeg',
+    id: 'f15',
+    name: 'Matías Prado Escobar',
+    role: 'Consejero Facultad de Ingeniería',
+    major: 'Ingeniería Civil en Ciencia de Datos',
+    image: '/img/facultades/matias_prado.jpg',
     type: 'facultad'
   },
   {
-    id: 'f9',
-    name: 'Ethan Palma Martinez',
-    role: 'Consejero Facultad Ciencias',
-    major: 'Ciencias',
-    image: '/img/facultades/Ethan_Palma_Martinez.jpeg',
-    type: 'facultad'
-  },
-  {
-    id: 'f10',
-    name: 'Gesenia Bravo Guerrero',
-    role: 'Consejera Facultad Ciencias',
-    major: 'Ciencias',
-    image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg',
+    id: 'f16',
+    name: 'Scarlet Contreras',
+    role: 'Consejera Facultad de Ingeniería',
+    major: 'Ingeniería Civil Bioquímica',
+    image: '/img/facultades/Scarlet_Contreras.jpeg',
     type: 'facultad'
   },
 ];
@@ -226,157 +277,222 @@ export const FAQS: FAQItem[] = [
 export const FACULTIES: Faculty[] = [
   {
     id: '1',
-    name: 'Filosofía y Educación',
-    shortName: 'FIL ED',
-    slug: 'fil-ed',
+    name: 'Facultad de Filosofía y Educación',
+    shortName: 'FILED',
+    slug: 'filed',
     icon: '📚',
     representatives: [
       {
-        name: 'Camila Ojeda Crisosto',
+        name: 'Camila Ojeda Crisisto',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'camila.ojeda.c@mail.pucv.cl',
         image: '/img/facultades/Camila_Ojeda_Crisosto.jpeg'
       },
       {
         name: 'Felipe Armijo',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'felipeandresarmijotorres@gmail.com',
         image: '/img/facultades/felipe_armijo.jpg'
       },
     ],
     careers: [
+      'Educación Parvulario (EPA)',
+      'Educación Básica (EBA)',
+      'Educación Especial (EDE)',
+      'Educación Física',
+      'Psicología',
+      'Pedagogía en Filosofía',
+      'Licenciatura en Filosofía',
       'Pedagogía en Historia, Geografía y Ciencias Sociales',
-      'Pedagogía en Educación Física'
+      'Licenciatura en Historia',
+      'Pedagogía en Inglés',
+      'Interpretación Inglés-Español',
+      'Pedagogía en Castellano y Comunicación',
+      'Licenciatura en Lingüísticas y Literatura',
+      'Pedagogía en Música',
+      'Licenciatura en Cs. y Arte Musicales - Mención y Composición',
+      'Interpretación Musical mención en Instrumento Principal'
     ],
-    instagram: '@fepucv_filed'
+    instagram: '@filedpucv'
   },
   {
     id: '3',
-    name: 'Arquitectura y Diseño',
-    shortName: 'ARQUITECTURA',
-    slug: 'arquitectura',
+    name: 'Facultad de Arquitectura y Urbanismo',
+    shortName: 'FAU',
+    slug: 'fau',
     icon: '📐',
     representatives: [
       {
-        name: 'Juan Luis Tuells Araya',
+        name: 'Sofía Álvarez Brofman',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
-        image: '/img/facultades/Juan_Tuells_Araya.jpeg'
-      },
-      {
-        name: 'Sofía Álvarez Bronfman',
-        role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'maria.alvarez.b@mail.pucv.cl',
         image: '/img/facultades/Sofia_Alvarez_Bronfman.jpeg'
       },
+      {
+        name: 'Juan Luis Tuells Araya',
+        role: 'Representante',
+        email: 'juan.tuells.a@mail.pucv.cl',
+        image: '/img/facultades/Juan_Tuells_Araya.jpeg'
+      },
     ],
-    careers: ['Arquitectura', 'Diseño Gráfico', 'Diseño Industrial'],
-    instagram: '@eadpucv'
+    careers: ['Arquitectura', 'Diseño', 'Licenciatura en Arte'],
+    instagram: '@pucvconsejeria.fau'
   },
   {
     id: '4',
-    name: 'Derecho',
+    name: 'Facultad de Derecho',
     shortName: 'DERECHO',
     slug: 'derecho',
     icon: '⚖️',
     representatives: [
       {
-        name: 'Benjamín Padilla',
+        name: 'Benjamin Padilla Estadella',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'benjamin.padilla.e@mail.pucv.cl',
         image: '/img/facultades/benjamin_padilla.jpg'
       },
       {
         name: 'Sofía Aguilera Varas',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'sofia.aguilera.v@mmail.pucv.cl',
         image: '/img/facultades/Sofia_Aguilera_Varas.jpeg'
       },
     ],
     careers: ['Derecho'],
-    instagram: '@derechopucv'
+    instagram: '@cfacultadderechopucv'
   },
   {
     id: '5',
-    name: 'Ciencias Económicas y Administrativas',
+    name: 'Facultad de Ciencias Económicas y Administrativas',
     shortName: 'FACEA',
     slug: 'facea',
     icon: '📊',
     representatives: [
       {
+        name: 'Sofia Venegas',
+        role: 'Representante',
+        email: 'sofia.venegas.f@mail.pucv.cl',
+        image: '/img/facultades/Sofia_venegas.jpeg'
+      },
+      {
         name: 'Ainhoa Mancilla',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'Ainhoa.mancilla.d@mail.pucv.cl',
         image: '/img/facultades/ainhoa_mancilla.jpg'
       },
+      {
+        name: 'Antonia Andrade',
+        role: 'Representante',
+        email: 'antonia.andrade.r@mail.pucv.cl',
+        image: '/img/facultades/'
+      },
+      
+
     ],
     careers: [
-      'Trabajo Social',
-      'Periodismo',
-      'Ingeniería Comercial',
       'Contador Auditor',
-      'Ingeniería de Ejecución en Administración de Negocios'
+      'Ingeniería Comercial',
+      'Ingeniería en Administración de Negocios',
+      'Trabajo Social',
+      'Periodismo'
     ],
     instagram: '@faceapucv'
   },
   {
     id: '6',
-    name: 'Ingeniería',
-    shortName: 'INGENIERÍA',
+    name: 'Facultad de Ingeniería',
+    shortName: 'FIN',
     slug: 'ingenieria',
     icon: '⚙️',
     representatives: [
       {
-        name: 'Matías Prado',
-        role: 'Presidente',
-        email: 'matias.prado@pucv.cl',
+        name: 'José Morales Delgado',
+        role: 'Representante',
+        email: 'jose.morales.d@mail.pucv.cl',
+        image: '/img/facultades/Jose.jpeg'
+      },
+      {
+        name: 'Matías Prado Escobar',
+        role: 'Representante',
+        email: 'matias.prado.e@mail.pucv.cl',
         image: '/img/facultades/matias_prado.jpg'
       },
       {
         name: 'Scarlet Contreras',
-        role: 'Vicepresidenta',
-        email: 'scarlet.c@pucv.cl',
+        role: 'Representante',
+        email: 'scarlet.contreras.m@mail.pucv.cl',
         image: '/img/facultades/Scarlet_Contreras.jpeg'
-      },
-      {
-        name: 'José Antonio Morales',
-        role: 'Secretario',
-        email: 'jose.morales@pucv.cl',
-        image: '/img/facultades/Jose.jpeg'
       },
     ],
     careers: [
-      'Ingeniería Civil en Ciencias de Datos',
-      'Ingeniería Civil Metalúrgica',
+      'Ingeniería Civil',
       'Ingeniería Civil Bioquímica',
-      'Ing. Civil Informática',
-      'Ing. Civil Industrial',
-      'Ing. Civil Química',
-      'Ing. Civil Eléctrica',
-      'Ing. Civil Mecánica'
+      'Ingeniería en Bioprocesos - Plan Complementario',
+      'Ingeniería Civil Eléctrica',
+      'Ingeniería Civil Electrónica',
+      'Ingeniería Eléctrica',
+      'Ingeniería Electrónica',
+      'Ingeniería Civil en Telecomunicaciones',
+      'Ingeniería Civil Informática',
+      'Ingeniería en Informática',
+      'Ingeniería Civil en Ciencias de Datos',
+      'Ingeniería en Construcción',
+      'Ingeniería Civil en Construcción',
+      'Ingeniería Civil en Transporte',
+      'Ingeniería Civil Industrial',
+      'Ingeniería Civil Mecánica',
+      'Ingeniería Mecánica',
+      'Ingeniería Civil Mecánica VESPERTINA',
+      'Ingeniería Civil Química',
+      'Ingeniería Civil Metalúrgica',
+      'Ingeniería Civil de Minas',
+      'Bachillerato en Ingeniería'
     ],
-    instagram: '@fingpucv'
+    instagram: '@consejeriafin_pucv'
   },
   {
     id: '8',
-    name: 'Ciencias',
+    name: 'Facultad de Ciencias',
     shortName: 'CIENCIAS',
     slug: 'ciencias',
     icon: '🧪',
     representatives: [
       {
-        name: 'Ethan Palma Martinez',
+        name: 'Yesenia Bravo Guerrero',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
+        email: 'gessenia.bravo.g@mail.pucv.cl',
+        image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg'
+      },
+      {
+        name: 'Ethan Palma Martines',
+        role: 'Representante',
+        email: 'ethan.palma.m@mail.pucv.cl',
         image: '/img/facultades/Ethan_Palma_Martinez.jpeg'
       },
       {
-        name: 'Gesenia Bravo Guerrero',
+        name: 'Joshua Diaz Galindo',
         role: 'Representante',
-        email: 'pendiente@pucv.cl',
-        image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg'
+        email: 'joshua.diaz.g@mail.pucv.cl',
+        image: '/img/facultades/Joshua_Diaz_Galindo.jpeg'
       },
     ],
-    careers: ['Química Industrial', 'Biología', 'Química', 'Física', 'Matemáticas'],
+    careers: [
+      'Kinesiología',
+      'Bachillerato en Ciencias',
+      'Tecnología Médica',
+      'Pedagogía en Biología y Ciencias Naturales',
+      'Licenciatura en Biología',
+      'Licenciatura en estadística',
+      'Ingeniería Estadística',
+      'Licenciatura en Física / mención astronomía',
+      'Pedagogía en Física y Ciencias Naturales',
+      'Pedagogía en Matemática',
+      'Licenciatura en Matemáticas',
+      'Bioquímica',
+      'Pedagogía en Química y Ciencias Naturales',
+      'Química Industrial',
+      'Química y Farmacia'
+    ],
+    instagram: '@consejeria_ciencias_pucv'
   },
 ];
