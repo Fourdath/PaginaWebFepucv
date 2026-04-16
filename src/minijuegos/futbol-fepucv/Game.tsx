@@ -308,7 +308,7 @@ export const Game: React.FC<GameProps> = ({ playerChar, cpuChar, onGameOver }) =
     if (state.flashGoalFor === 'cpu') {
       return 'Gol de la CPU';
     }
-    return 'A/D o flechas para moverte, W o arriba para saltar, espacio para patear';
+    return '¡Partido en juego!';
   }, [countdown, state.flashGoalFor, timeLeft]);
 
   return (
@@ -361,6 +361,16 @@ export const Game: React.FC<GameProps> = ({ playerChar, cpuChar, onGameOver }) =
               </div>
               <div className="rounded-full bg-white/88 px-4 py-2 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-fepucv-secondary shadow-md">
                 {statusText}
+              </div>
+              <div className="w-full rounded-[20px] border border-white/55 bg-white/92 px-4 py-3 text-center shadow-lg">
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-fepucv-textSecondary">
+                  Controles
+                </p>
+                <div className="mt-2 space-y-1 text-[11px] font-semibold text-fepucv-secondary">
+                  <p>Mover: <span className="font-black">A / D</span> o flechas</p>
+                  <p>Saltar: <span className="font-black">W</span> o arriba</p>
+                  <p>Patear: <span className="font-black">Espacio</span> o enter</p>
+                </div>
               </div>
             </div>
 
@@ -502,7 +512,10 @@ const HudPanel: React.FC<{
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-fepucv-textSecondary">
             {isPlayer ? 'Jugador' : 'CPU'}
           </p>
-          <p className="text-lg font-black text-fepucv-secondary">{character.name}</p>
+          <p className="text-base font-black leading-tight text-fepucv-secondary md:text-lg">{character.name}</p>
+          <p className="mt-1 text-[11px] font-semibold leading-tight text-fepucv-textSecondary">
+            {character.role}
+          </p>
         </div>
         <div className={`ml-auto text-4xl font-black ${isPlayer ? 'text-fepucv-secondary' : 'text-fepucv-primary'}`}>
           {score}

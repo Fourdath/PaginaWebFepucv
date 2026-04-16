@@ -2,12 +2,12 @@ import React from 'react';
 import { NewsItem, ExecutiveMember, ServiceItem, DocumentItem, FAQItem, Faculty } from './types';
 
 export const CHARACTERS = [
-  { id: 1, name: 'Francesca', role: 'Presidente', img: '/img/mesa/francesca_crisostomo.jpeg' },
-  { id: 2, name: 'Krishna', role: 'Vicepresidenta', img: '/img/mesa/krishna_marambio.jpeg' },
-  { id: 3, name: 'Mirko', role: 'Sec. General', img: '/img/mesa/mirko_pena.jpeg' },
-  { id: 4, name: 'Romina', role: 'Finanzas', img: '/img/mesa/romina_farias.jpeg' },
-  { id: 5, name: 'Valeria', role: 'Comunicaciones', img: '/img/mesa/valeria_aguilera.jpeg' },
-  { id: 6, name: 'Vincent', role: 'Deportes', img: '/img/mesa/vincent_munos.jpeg' },
+  { id: 1, name: 'Francesca', role: 'Secretaria General', img: '/img/mesa/francesca_crisostomo.jpeg' },
+  { id: 2, name: 'Krishna', role: 'Secretaria de Comunicaciones', img: '/img/mesa/krishna_marambio.jpeg' },
+  { id: 3, name: 'Mirko Peña Perez', role: 'Vicepresidente', img: '/img/mesa/mirko_pena.jpeg' },
+  { id: 4, name: 'Romina', role: 'Secretaria de Bienestar y Extensión', img: '/img/mesa/romina_farias.jpeg' },
+  { id: 5, name: 'Valeria', role: 'Presidente', img: '/img/mesa/valeria_aguilera.jpeg' },
+  { id: 6, name: 'Vincent', role: 'Secretaria de Finanzas', img: '/img/mesa/vincent_munos.jpeg' },
 ];
 
 
@@ -70,7 +70,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
   },
   {
     id: 'm2',
-    name: 'Mirko Peña',
+    name: 'Mirko Peña Perez',
     role: 'Vicepresidente',
     major: 'vicepresidencia.fepucv@gmail.com',
     image: '/img/mesa/mirko_pena.jpeg',
