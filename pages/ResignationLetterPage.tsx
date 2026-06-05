@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const resignationLetter = [
   'Federación de Estudiantes PUCV Rawson #47 Pontificia Universidad Católica de Valparaíso',
   'Estimada comunidad estudiantil:',
-  'Por medio de la presente, me dirijo a ustedes para formalizar mi renuncia al cargo de Presidenta de la Federación de Estudiantes.',
+  'Por medio de la presente, me dirijo a ustedes para formalizar mi renuncia al cargo de Presidente de la Federación de Estudiantes.',
   'Ha sido un período profundamente significativo en mi vida personal, estudiantil y política. Asumí este desafío con la convicción de que la representación estudiantil debe construirse desde el compromiso, la escucha y el trabajo colectivo, intentando siempre desempeñar este rol con responsabilidad, empatía y honestidad.',
   'Durante este tiempo habité experiencias que me marcarán profundamente, tanto por los desafíos enfrentados como por las personas que encontré en el camino. Agradezco sinceramente a toda la comunidad estudiantil por la confianza depositada en mí, por el apoyo, las críticas, las conversaciones compartidas y también por exigir constantemente una federación más presente y consciente de las distintas realidades que atraviesan a nuestro estudiantado.',
   'Quiero también agradecer a la institución, y a quienes la componen, por abrir espacios de diálogo incluso en momentos complejos, permitiendo que muchas discusiones necesarias pudieran darse desde el respeto y la disposición a construir en conjunto.',
@@ -73,7 +73,7 @@ export const ResignationLetterPage: React.FC = () => {
                 <div className="pt-4 text-fepucv-secondary font-semibold">
                   <p>Con respeto y afecto,</p>
                   <p className="mt-4">Valeria Aguilera</p>
-                  <p>Presidenta FEPUCV 2025 - 2026</p>
+                  <p>Presidente FEPUCV 2025 - 2026</p>
                 </div>
               </div>
             </article>

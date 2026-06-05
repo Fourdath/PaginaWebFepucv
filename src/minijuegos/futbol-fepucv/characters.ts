@@ -5,6 +5,6 @@ export const CHARACTERS: Character[] = [
   { id: 2, name: 'Krishna', role: 'Secretaria de Comunicaciones', img: '/img/mesa/krishna_marambio.jpeg' },
   { id: 3, name: 'Mirko Peña Perez', role: 'Vicepresidente', img: '/img/mesa/mirko_pena.jpeg' },
   { id: 4, name: 'Romina', role: 'Secretaria de Bienestar y Extensión', img: '/img/mesa/romina_farias.jpeg' },
-  { id: 5, name: 'Sofia', role: 'Presidenta', img: '/img/facultades/Sofia_venegas.jpeg' },
+  { id: 5, name: 'Sofia', role: 'Presidente', img: '/img/facultades/Sofia_venegas.jpeg' },
   { id: 6, name: 'Vincent', role: 'Secretaria de Finanzas', img: '/img/mesa/vincent_munos.jpeg' },
 ];
