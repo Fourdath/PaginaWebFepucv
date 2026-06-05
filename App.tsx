@@ -14,6 +14,7 @@ import { AdminDashboard } from "./pages/AdminDashboard";
 import { FacultiesPage } from "./pages/FacultiesPage";
 import { FacultyDetail } from "./pages/FacultyDetail";
 import { MinijuegosPage } from "./pages/MinijuegosPage";
+import { ResignationLetterPage } from "./pages/ResignationLetterPage";
 
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -59,6 +60,7 @@ const App: React.FC = () => {
             <Route path="contacto" element={<ContactPage />} />
             <Route path="facultades" element={<FacultiesPage />} />
             <Route path="facultades/:slug" element={<FacultyDetail />} />
+            <Route path="renuncia-valeria-aguilera" element={<ResignationLetterPage />} />
             <Route path="minijuegos" element={<MinijuegosPage />} />
             <Route path="admin" element={<AdminDashboard onAddNews={handleAddNews} />} />
             <Route path="*" element={<Navigate to="/" replace />} />

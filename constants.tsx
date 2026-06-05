@@ -6,7 +6,7 @@ export const CHARACTERS = [
   { id: 2, name: 'Krishna', role: 'Secretaria de Comunicaciones', img: '/img/mesa/krishna_marambio.jpeg' },
   { id: 3, name: 'Mirko Peña Perez', role: 'Vicepresidente', img: '/img/mesa/mirko_pena.jpeg' },
   { id: 4, name: 'Romina', role: 'Secretaria de Bienestar y Extensión', img: '/img/mesa/romina_farias.jpeg' },
-  { id: 5, name: 'Valeria', role: 'Presidente', img: '/img/mesa/valeria_aguilera.jpeg' },
+  { id: 5, name: 'Sofia', role: 'Presidenta', img: '/img/facultades/Sofia_venegas.jpeg' },
   { id: 6, name: 'Vincent', role: 'Secretaria de Finanzas', img: '/img/mesa/vincent_munos.jpeg' },
 ];
 
@@ -62,10 +62,10 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
   // MESA EJECUTIVA
   {
     id: 'm1',
-    name: 'Valeria Aguilera',
-    role: 'Presidente',
+    name: 'Sofia Venegas',
+    role: 'Presidenta',
     major: 'presidencia.fepucv@gmail.com',
-    image: '/img/mesa/valeria_aguilera.jpeg',
+    image: '/img/facultades/Sofia_venegas.jpeg',
     type: 'mesa'
   },
   {
@@ -166,14 +166,6 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     role: 'Consejero Facultad de Ciencias',
     major: 'Licenciatura en Física',
     image: '/img/facultades/Joshua_Diaz_Galindo.jpeg',
-    type: 'facultad'
-  },
-  {
-    id: 'f6',
-    name: 'Sofia Venegas',
-    role: 'Consejera Facultad FACEA',
-    major: 'Periodismo',
-    image: '/img/facultades/Sofia_venegas.jpeg',
     type: 'facultad'
   },
   {
@@ -296,7 +288,7 @@ export const FACULTIES: Faculty[] = [
       },
     ],
     careers: [
-      'Educación Parvulario (EPA)',
+      'Educación Parvularia (EPA)',
       'Educación Básica (EBA)',
       'Educación Especial (EDE)',
       'Educación Física',
@@ -368,12 +360,6 @@ export const FACULTIES: Faculty[] = [
     slug: 'facea',
     icon: '📊',
     representatives: [
-      {
-        name: 'Sofia Venegas',
-        role: 'Representante',
-        email: 'sofia.venegas.f@mail.pucv.cl',
-        image: '/img/facultades/Sofia_venegas.jpeg'
-      },
       {
         name: 'Ainhoa Mancilla',
         role: 'Representante',

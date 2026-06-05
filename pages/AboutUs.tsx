@@ -67,7 +67,7 @@ export const AboutUs: React.FC = () => {
         </div>
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {EXECUTIVE_BOARD.map(m => (
+            {EXECUTIVE_BOARD.filter(m => m.type === 'mesa').map(m => (
               <div key={m.id} className="text-center">
                 <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg mb-6">
                   <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
