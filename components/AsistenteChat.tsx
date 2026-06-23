@@ -12,12 +12,16 @@ interface HistorialItem {
   respuesta: string;
 }
 
+const ASISTENTE_DESHABILITADO = true;
+const MENSAJE_ASISTENTE_DESHABILITADO =
+  'Hola! El asistente virtual FEPUCV se encuentra temporalmente deshabilitado porque esta en fase de entrenamiento.\n\nEstamos trabajando para que vuelva con respuestas mas eficientes y capaces. Gracias por tu paciencia.';
+
 const AsistenteChat: React.FC = () => {
   const [abierto, setAbierto] = useState(false);
   const [mensajes, setMensajes] = useState<Mensaje[]>([
     {
       rol: 'asistente',
-      texto: 'Hola! Soy el asistente virtual de la FEPUCV, basado en inteligencia artificial 👋\n\nPuedo ayudarte a responder preguntas sobre reglamentos, estatutos y documentos oficiales. Ten en cuenta que, aunque busco orientarte de la mejor manera posible, puedo cometer errores, por lo que siempre es importante revisar los documentos oficiales ante dudas relevantes. ¿En qué te puedo ayudar?'
+      texto: MENSAJE_ASISTENTE_DESHABILITADO
     }
   ]);
   const [input, setInput] = useState('');
@@ -30,7 +34,7 @@ const AsistenteChat: React.FC = () => {
   }, [mensajes, cargando]);
 
   useEffect(() => {
-    if (abierto) setTimeout(() => inputRef.current?.focus(), 100);
+    if (abierto && !ASISTENTE_DESHABILITADO) setTimeout(() => inputRef.current?.focus(), 100);
   }, [abierto]);
 
   const buildHistorial = (): HistorialItem[] => {
@@ -46,6 +50,8 @@ const AsistenteChat: React.FC = () => {
   };
 
   const enviar = async (textOverride?: string) => {
+    if (ASISTENTE_DESHABILITADO) return;
+
     const pregunta = (textOverride ?? input).trim();
     if (!pregunta || cargando) return;
 
@@ -86,7 +92,7 @@ const AsistenteChat: React.FC = () => {
     setMensajes([
       {
         rol: 'asistente',
-        texto: '¡Hola! Soy el asistente virtual de la FEPUCV, basado en inteligencia artificial 👋\n\nPuedo ayudarte a responder preguntas sobre reglamentos, estatutos y documentos oficiales. Ten en cuenta que, aunque busco orientarte de la mejor manera posible, puedo cometer errores, por lo que siempre es importante revisar los documentos oficiales ante dudas relevantes. ¿En qué te puedo ayudar?'
+        texto: MENSAJE_ASISTENTE_DESHABILITADO
       }
     ]);
 
@@ -132,13 +138,14 @@ const AsistenteChat: React.FC = () => {
               </div>
               <div>
                 <p className="text-white font-bold text-sm leading-tight">Asistente FEPUCV</p>
-                <p className="text-gray-400 text-xs">Reglamentos y documentos oficiales</p>
+                <p className="text-gray-400 text-xs">En fase de entrenamiento</p>
               </div>
             </div>
             <button
               onClick={limpiar}
-              className="text-gray-400 hover:text-white transition-colors text-xs whitespace-nowrap"
-              title="Nueva conversación"
+              disabled={ASISTENTE_DESHABILITADO}
+              className="text-gray-400 hover:text-white transition-colors text-xs whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+              title={ASISTENTE_DESHABILITADO ? 'Asistente temporalmente deshabilitado' : 'Nueva conversacion'}
             >
               Nueva conv.
             </button>
@@ -182,7 +189,7 @@ const AsistenteChat: React.FC = () => {
             <div ref={bottomRef} />
           </div>
 
-          {mensajes.length === 1 && !cargando && (
+          {mensajes.length === 1 && !cargando && !ASISTENTE_DESHABILITADO && (
             <div className="px-3 pb-2 pt-1 flex gap-2 flex-wrap bg-gray-50 shrink-0">
               {SUGERENCIAS.map(s => (
                 <button
@@ -203,13 +210,13 @@ const AsistenteChat: React.FC = () => {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKey}
-              placeholder="Escribe tu pregunta..."
-              disabled={cargando}
-              className="flex-1 text-sm px-4 py-2.5 rounded-full border border-fepucv-border focus:outline-none focus:border-fepucv-primary bg-gray-50 disabled:opacity-50"
+              placeholder={ASISTENTE_DESHABILITADO ? 'Asistente temporalmente deshabilitado...' : 'Escribe tu pregunta...'}
+              disabled={ASISTENTE_DESHABILITADO || cargando}
+              className="flex-1 text-sm px-4 py-2.5 rounded-full border border-fepucv-border focus:outline-none focus:border-fepucv-primary bg-gray-50 disabled:opacity-60 disabled:cursor-not-allowed"
             />
             <button
               onClick={() => enviar()}
-              disabled={!input.trim() || cargando}
+              disabled={ASISTENTE_DESHABILITADO || !input.trim() || cargando}
               className="w-10 h-10 bg-fepucv-secondary text-white rounded-full flex items-center justify-center hover:bg-fepucv-primary hover:text-fepucv-secondary transition-all disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
             >
               <svg className="w-4 h-4 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">

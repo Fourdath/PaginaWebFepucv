@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-50 bg-white border-b border-fepucv-border shadow-sm">
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 shrink-0">
             <div className="w-14 h-14 rounded-full overflow-hidden bg-white shadow-inner flex items-center justify-center text-fepucv-secondary font-bold text-lg">
               <img
                 src="/img/logo/logo.jpg"
@@ -32,11 +32,11 @@ export const Header: React.FC = () => {
             </div>
             <div>
               <span className="block text-xl font-bold text-fepucv-secondary leading-none tracking-tight">FEPUCV</span>
-              <span className="text-[10px] text-fepucv-textSecondary uppercase tracking-widest font-semibold">Federación PUCV</span>
+              <span className="text-[10px] text-fepucv-textSecondary uppercase tracking-widest font-semibold whitespace-nowrap">Federación PUCV</span>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center gap-4 lg:gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
