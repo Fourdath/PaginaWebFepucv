@@ -29,32 +29,6 @@ const MesaCard: React.FC<{ member: ExecutiveMember }> = ({ member }) => (
   </div>
 );
 
-const FormerPresidentCard: React.FC = () => (
-  <div className="mt-14 flex justify-center">
-    <div className="w-full max-w-[190px] text-center">
-      <div className="aspect-[4/5] overflow-hidden rounded-fepucv border border-fepucv-border bg-white shadow-sm">
-        <img
-          src="/img/mesa/valeria_aguilera.jpeg"
-          alt="Valeria Aguilera"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <p className="mt-4 text-[10px] font-bold uppercase tracking-widest text-fepucv-primary">
-        Expresidenta
-      </p>
-      <h3 className="mt-1 text-sm font-bold text-fepucv-secondary">
-        Valeria Aguilera
-      </h3>
-      <Link
-        to="/renuncia-valeria-aguilera"
-        className="mt-3 inline-flex items-center justify-center rounded-full border border-fepucv-primary px-4 py-2 text-[11px] font-bold uppercase tracking-widest text-fepucv-secondary transition-colors hover:bg-fepucv-primary"
-      >
-        Carta de renuncia
-      </Link>
-    </div>
-  </div>
-);
-
 const SuperiorCard: React.FC<{ member: ExecutiveMember }> = ({ member }) => (
   <div className="group bg-white rounded-fepucv overflow-hidden border border-fepucv-border transition-all hover:shadow-xl mx-auto w-full max-w-[240px]">
     <div className="aspect-[1/1] overflow-hidden">
@@ -169,7 +143,6 @@ export const Home: React.FC<HomeProps> = ({ news: _news }) => {
             ))}
           </div>
 
-          <FormerPresidentCard />
         </div>
       </section>
 
