@@ -65,7 +65,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     name: 'Sofia Venegas',
     role: 'Presidente',
     major: 'presidencia.fepucv@gmail.com',
-    image: '/img/facultades/Sofia_venegas.jpeg',
+    image: '/img/mesa/sofia_venegas.jpeg',
     type: 'mesa'
   },
   {
