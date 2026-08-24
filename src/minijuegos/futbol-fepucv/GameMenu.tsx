@@ -220,17 +220,21 @@ const PreviewCard: React.FC<{
     }`}
   >
     <p className="text-xs font-bold uppercase tracking-[0.28em] text-fepucv-textSecondary">{label}</p>
-    <div className="mt-4 flex items-center gap-4">
+    <div className="mt-4 grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-3">
       <img
         src={character.img}
         alt={character.name}
-        className={`h-24 w-24 rounded-full border-4 object-cover object-top ${
+        className={`h-20 w-20 rounded-full border-4 object-cover object-top ${
           accent === 'player' ? 'border-fepucv-primary' : 'border-fepucv-secondary'
         }`}
       />
-      <div>
-        <p className="text-2xl font-bold text-fepucv-secondary">{character.name}</p>
-        <p className="mt-1 text-sm text-fepucv-textSecondary">{character.role}</p>
+      <div className="min-w-0">
+        <p className="break-words text-xl font-bold leading-tight text-fepucv-secondary">
+          {character.name}
+        </p>
+        <p className="mt-2 break-words text-sm leading-snug text-fepucv-textSecondary">
+          {character.role}
+        </p>
       </div>
     </div>
   </div>
