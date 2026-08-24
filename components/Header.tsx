@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-50 bg-white border-b border-fepucv-border shadow-sm">
       <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center gap-3 shrink-0">
+          <Link to="/" className="flex items-center gap-3 shrink-0 lg:mr-12 xl:mr-16">
             <div className="w-14 h-14 rounded-full overflow-hidden bg-white shadow-inner flex items-center justify-center text-fepucv-secondary font-bold text-lg">
               <img
                 src="/img/logo/logo.jpg"
