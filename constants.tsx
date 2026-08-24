@@ -137,35 +137,11 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
     type: 'facultad'
   },
   {
-    id: 'f2',
-    name: 'Juan Luis Tuells Araya',
-    role: 'Consejero Facultad de Arquitectura y Urbanismo',
-    major: 'Arquitectura',
-    image: '/img/facultades/Juan_Tuells_Araya.jpeg',
-    type: 'facultad'
-  },
-  {
-    id: 'f3',
-    name: 'Yesenia Bravo Guerrero',
-    role: 'Consejera Facultad de Ciencias',
-    major: 'Química Industrial',
-    image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg',
-    type: 'facultad'
-  },
-  {
     id: 'f4',
     name: 'Ethan Palma Martines',
     role: 'Consejero Facultad de Ciencias',
     major: 'Licenciatura en Matemática',
     image: '/img/facultades/Ethan_Palma_Martinez.jpeg',
-    type: 'facultad'
-  },
-  {
-    id: 'f5',
-    name: 'Joshua Diaz Galindo',
-    role: 'Consejero Facultad de Ciencias',
-    major: 'Licenciatura en Física',
-    image: '/img/facultades/Joshua_Diaz_Galindo.jpeg',
     type: 'facultad'
   },
   {
@@ -320,12 +296,6 @@ export const FACULTIES: Faculty[] = [
         email: 'maria.alvarez.b@mail.pucv.cl',
         image: '/img/facultades/Sofia_Alvarez_Bronfman.jpeg'
       },
-      {
-        name: 'Juan Luis Tuells Araya',
-        role: 'Representante',
-        email: 'juan.tuells.a@mail.pucv.cl',
-        image: '/img/facultades/Juan_Tuells_Araya.jpeg'
-      },
     ],
     careers: ['Arquitectura', 'Diseño', 'Licenciatura en Arte'],
     instagram: '@pucvconsejeria.fau'
@@ -444,22 +414,10 @@ export const FACULTIES: Faculty[] = [
     icon: '🧪',
     representatives: [
       {
-        name: 'Yesenia Bravo Guerrero',
-        role: 'Representante',
-        email: 'gessenia.bravo.g@mail.pucv.cl',
-        image: '/img/facultades/Gesenia_Bravo_Guerrero.jpeg'
-      },
-      {
         name: 'Ethan Palma Martines',
         role: 'Representante',
         email: 'ethan.palma.m@mail.pucv.cl',
         image: '/img/facultades/Ethan_Palma_Martinez.jpeg'
-      },
-      {
-        name: 'Joshua Diaz Galindo',
-        role: 'Representante',
-        email: 'joshua.diaz.g@mail.pucv.cl',
-        image: '/img/facultades/Joshua_Diaz_Galindo.jpeg'
       },
     ],
     careers: [
