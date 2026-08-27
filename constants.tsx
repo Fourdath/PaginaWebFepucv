@@ -113,7 +113,7 @@ export const EXECUTIVE_BOARD: ExecutiveMember[] = [
   {
     id: 's1',
     name: 'Vittore Tapia Larrañaga',
-    role: 'Consejera Superior',
+    role: 'Consejero Superior',
     major: 'Derecho',
     image: '/img/consejeria/Vitore.jpg',
     type: 'superior'
