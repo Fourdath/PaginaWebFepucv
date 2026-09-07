@@ -28,6 +28,8 @@ El portal funciona como una aplicación React de una sola página, con contenido
 | Asistente virtual | API basada en Gemini y documentos oficiales; interfaz temporalmente deshabilitada |
 | Administración | Formulario prototipo para crear noticias solo en memoria del navegador |
 
+El minijuego incorpora la **Copa FEPUCV**: cinco rivales con dificultad progresiva, caricaturas, controles táctiles, guardado de campaña, reinicio y top 3 local/compartido. Configuración de Supabase, arte y pruebas en [la guía del juego](docs/copa-fepucv.md).
+
 ### Rutas
 
 | Ruta | Contenido |

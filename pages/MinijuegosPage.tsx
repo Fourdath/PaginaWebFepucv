@@ -1,26 +1,21 @@
-﻿import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GameMenu } from '../src/minijuegos/futbol-fepucv/GameMenu';
 
+const PHONE_QUERY = '(max-width: 767px), (pointer: coarse) and (max-height: 540px)';
 export const MinijuegosPage: React.FC = () => {
-  return (
-    <div className="bg-white min-h-screen py-20">
-      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-2xl font-bold text-fepucv-primary uppercase tracking-widest mb-2">
-            Minijuegos
-          </h2>
-          <h1 className="text-4xl md:text-5xl font-bold text-fepucv-secondary mb-4">
-            Fútbol FEPUCV
-          </h1>
-          <div className="w-24 h-1.5 bg-fepucv-primary mx-auto rounded-full mb-8"></div>
-          <p className="mx-auto max-w-3xl text-lg text-fepucv-textSecondary leading-relaxed">
-            Un espacio recreativo integrado al sitio para jugar una pichanga rápida con la mesa
-            FEPUCV, manteniendo la misma estética general del portal.
-          </p>
-        </div>
-
-        <GameMenu />
-      </div>
-    </div>
-  );
+  const [phone, setPhone] = useState(() => window.matchMedia(PHONE_QUERY).matches);
+  useEffect(() => {
+    const media = window.matchMedia(PHONE_QUERY);
+    const update = () => setPhone(media.matches);
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+  return <div className="cup-page"><div className="cup-page-inner">{phone ? <section className="cup cup-phone-notice">
+    <span className="cup-eyebrow">COPA FEPUCV · ARCADE CLUB</span>
+    <svg viewBox="0 0 80 65" aria-hidden="true"><rect x="6" y="4" width="68" height="44" rx="5" fill="none" stroke="currentColor" strokeWidth="3"/><path d="M29 60h22M40 48v12M24 26l10 8 21-19" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
+    <h1>Nos vemos en el computador.</h1>
+    <p>Este minijuego no es compatible con teléfonos. Ábrelo desde un computador para jugar.</p>
+    <span className="cup-phone-detail">Necesitas teclado: flechas para moverte y espacio para patear.</span>
+    <a href="/" className="cup-button secondary">Volver al inicio</a>
+  </section> : <GameMenu/>}</div></div>;
 };
