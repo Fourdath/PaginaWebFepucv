@@ -1,4 +1,6 @@
 
+export type NewsStatus = 'publicada' | 'borrador';
+
 export interface NewsItem {
   id: string;
   title: string;
@@ -6,9 +8,12 @@ export interface NewsItem {
   content: string;
   category: string;
   date: string;
-  image: string;
+  image: string;          // portada (compatibilidad con el contenido existente)
   author: string;
   slug: string;
+  images?: string[];      // galeria: images[0] es la portada
+  status?: NewsStatus;    // sin valor => se trata como 'publicada'
+  featured?: boolean;     // destacada en portada
 }
 
 export interface ExecutiveMember {

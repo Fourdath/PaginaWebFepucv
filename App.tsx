@@ -28,6 +28,7 @@ import AsistenteChat from "./components/AsistenteChat";
 
 import { NewsItem } from "./types";
 import { INITIAL_NEWS } from "./constants";
+import { NewsDraft, commitDraft, loadNews, saveNews } from "./lib/newsStore";
 
 const LegacyHashRedirect = () => {
   const navigate = useNavigate();
@@ -54,11 +55,20 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
-  const [news, setNews] = useState<NewsItem[]>(INITIAL_NEWS);
+  const [news, setNews] = useState<NewsItem[]>(() => loadNews(INITIAL_NEWS));
 
-  const handleAddNews = (newArticle: NewsItem) => {
-    setNews((previousNews) => [newArticle, ...previousNews]);
+  const update = (next: NewsItem[]) => {
+    setNews(next);
+    saveNews(next);
   };
+
+  const handleSaveNews = (draft: NewsDraft, status: 'publicada' | 'borrador', author: string) =>
+    update(commitDraft(news, draft, status, author));
+
+  const handleDeleteNews = (id: string) => update(news.filter((n) => n.id !== id));
+
+  const handleToggleFeatured = (id: string) =>
+    update(news.map((n) => ({ ...n, featured: n.id === id ? !n.featured : false })));
 
   return (
     <Router>
@@ -93,7 +103,14 @@ const App: React.FC = () => {
             <Route path="/minijuegos" element={<MinijuegosPage />} />
             <Route
               path="/admin"
-              element={<AdminDashboard onAddNews={handleAddNews} />}
+              element={
+                <AdminDashboard
+                  news={news}
+                  onSaveNews={handleSaveNews}
+                  onDeleteNews={handleDeleteNews}
+                  onToggleFeatured={handleToggleFeatured}
+                />
+              }
             />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
