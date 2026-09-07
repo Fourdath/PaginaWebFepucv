@@ -71,7 +71,7 @@ export function loadNews(fallback: NewsItem[]): NewsItem[] {
     const raw = localStorage.getItem(KEY);
     if (!raw) return fallback;
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length ? parsed : fallback;
+    return Array.isArray(parsed) ? parsed : fallback;
   } catch {
     return fallback;
   }
