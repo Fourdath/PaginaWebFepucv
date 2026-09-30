@@ -156,7 +156,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-fepucv-text mb-2">Clave de la mesa</label>
+              <label className="block text-xs font-bold text-fepucv-text mb-2">Contraseña de la cuenta editora</label>
               <input
                 type="password"
                 autoComplete="current-password"
@@ -165,7 +165,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   setPassword(e.target.value);
                   setError('');
                 }}
-                placeholder="Clave entregada por la mesa"
+                placeholder="Contraseña creada para este editor"
                 className="w-full px-4 py-3 border border-fepucv-border rounded-fepucv text-sm outline-none focus:ring-2 focus:ring-fepucv-primary"
               />
             </div>
