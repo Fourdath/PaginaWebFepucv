@@ -4,7 +4,7 @@ import { Game, Stadium } from './Game';
 import { Portrait } from './Portrait';
 import { advanceCampaign, campaignPoints, matchPoints, opponentIds, STAGES } from './campaign';
 import type { Campaign, MatchResult } from './campaign';
-import { normalizeNickname, publishRecord, readCampaign, readGlobalRecords, readLocalRecords, readPreferredNickname, saveCampaign, saveLocalRecord, savePreferredNickname, validNickname } from './storage';
+import { normalizeNickname, publishRecord, readCampaign, readGlobalRecords, readPreferredNickname, saveCampaign, saveLocalRecord, savePreferredNickname, validNickname } from './storage';
 import type { RecordEntry } from './storage';
 import { nicknameOptions } from './nicknames';
 import './cup.css';
@@ -21,8 +21,8 @@ export const GameMenu: React.FC = () => {
   const [selected, setSelected] = useState(() => readCampaign()?.characterId || 1);
   const [screen, setScreen] = useState<'lobby' | 'match' | 'result'>('lobby');
   const [last, setLast] = useState<{ result: MatchResult; stage: number } | null>(null);
-  const [records, setRecords] = useState<RecordEntry[]>(readLocalRecords);
-  const [boardMode, setBoardMode] = useState<'loading' | 'global' | 'local'>('loading');
+  const [records, setRecords] = useState<RecordEntry[]>([]);
+  const [boardMode, setBoardMode] = useState<'loading' | 'global' | 'unavailable'>('loading');
   const [aliases, setAliases] = useState(() => { const preferred = readPreferredNickname(); return preferred ? [preferred, ...nicknameOptions().filter(n => n !== preferred)].slice(0, 3) : nicknameOptions(); });
   const [nickname, setNickname] = useState(readPreferredNickname);
   const [lockedNickname, setLockedNickname] = useState(false);
@@ -39,11 +39,17 @@ export const GameMenu: React.FC = () => {
   const route = opponentIds(campaign?.characterId || selected);
   const points = campaignPoints(campaign?.results || []);
 
-  useEffect(() => {
-    let ignore = false;
-    readGlobalRecords().then(data => { if (!ignore) { setRecords(data); setBoardMode('global'); } }).catch(() => { if (!ignore) setBoardMode('local'); });
-    return () => { ignore = true; };
-  }, []);
+  const refreshPodium = async () => {
+    setBoardMode('loading');
+    try {
+      setRecords(await readGlobalRecords());
+      setBoardMode('global');
+    } catch {
+      setRecords([]);
+      setBoardMode('unavailable');
+    }
+  };
+  useEffect(() => { void refreshPodium(); }, []);
   useEffect(() => { if (screen === 'result') { resultRef.current?.focus({ preventScroll: true }); resultRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }); } }, [screen]);
 
   const persist = (next: Campaign | null) => { setCampaign(next); setStorageWarning(!saveCampaign(next)); };
@@ -74,8 +80,8 @@ export const GameMenu: React.FC = () => {
       const data = await publishRecord(campaign, name);
       setRecords(data); setBoardMode('global'); setPublished(true); setSaveStatus('Marca guardada en el ranking de la comunidad. El top 3 muestra la mejor marca de cada apodo.');
     } catch {
-      setRecords(local.entries); setBoardMode('local');
-      setSaveStatus(local.saved ? 'Marca guardada en este dispositivo. No pudimos conectar con el ranking de la comunidad; puedes volver a intentar.' : 'No pudimos guardar la marca. Habilita el almacenamiento del navegador o vuelve a intentar la conexión.');
+      setSaveStatus(local.saved ? 'Marca pendiente solo en este dispositivo. No está publicada en el podio; puedes volver a intentar.' : 'No pudimos guardar la marca. Vuelve a intentar cuando el ranking esté disponible.');
+      void refreshPodium();
     } finally { busy.current = false; setSaving(false); }
   };
 
@@ -110,7 +116,7 @@ export const GameMenu: React.FC = () => {
       <section className="cup-panel cup-route-panel"><div className="cup-section-title"><div><p className="cup-eyebrow">02 / MODO HISTORIA</p><h2>El camino a la copa</h2></div><span className="cup-lives" aria-label={`${campaign?.lives ?? 3} vidas`}>{'♥'.repeat(campaign?.lives ?? 3)}<span>{'♡'.repeat(3 - (campaign?.lives ?? 3))}</span></span></div><p className="cup-muted">Vence al resto de la mesa. Cada victoria abre un duelo más difícil.</p>
         <ol className="cup-route">{route.map((id, index) => <li key={id} className={`${index < (campaign?.stage || 0) ? 'cleared' : ''} ${index === (campaign?.stage || 0) && !completed ? 'current' : ''}`}><span className="cup-route-number">{index < (campaign?.stage || 0) ? '✓' : `0${index + 1}`}</span><Portrait character={characterById(id)}/><div><small>{STAGES[index].venue}</small><strong>{characterById(id).name}</strong><p>{STAGES[index].title}</p></div><span className="cup-difficulty"><span aria-hidden="true">{'▰'.repeat(index + 1)}<i>{'▱'.repeat(4 - index)}</i></span><small>{index < (campaign?.stage || 0) ? 'SUPERADO' : STAGES[index].level}</small></span></li>)}</ol>
       </section>
-    </div><aside className="cup-sidebar"><section className="cup-panel cup-ranking"><div className="cup-section-title"><div><p className="cup-eyebrow">EL PODIO</p><h2>Los tres mejores</h2></div><Trophy/></div><p className="cup-board-scope"><i/>{boardMode === 'global' ? 'Ranking de la comunidad' : boardMode === 'loading' ? 'Conectando con la comunidad…' : 'Ranking de este dispositivo'}</p><div className="cup-podium">{[0, 1, 2].map(index => { const r = records[index]; return <div className={`cup-record rank-${index + 1}`} key={index}><span className="cup-rank-number">0{index + 1}</span>{r ? <><Portrait character={characterById(r.character_id)}/><div><b>{r.nickname}</b><small>{r.wins === 5 ? 'Campeón de la copa' : `${r.wins}/5 duelos superados`}</small></div><strong>{format(r.score)}<small>PTS</small></strong></> : <div><b>Este lugar puede ser tuyo</b><small>{index === 0 ? 'La primera leyenda está por llegar.' : 'Juega y firma tu mejor marca.'}</small></div>}</div>; })}</div><p className="cup-muted">{boardMode === 'global' ? 'Una marca por apodo. Solo las tres mejores llegan al podio.' : 'Las marcas locales se guardan en este navegador. El ranking compartido aparecerá cuando se conecte.'}</p></section>
+    </div><aside className="cup-sidebar"><section className="cup-panel cup-ranking"><div className="cup-section-title"><div><p className="cup-eyebrow">EL PODIO</p><h2>Los tres mejores</h2></div><Trophy/></div><p className="cup-board-scope"><i/>{boardMode === 'global' ? 'Ranking de la comunidad' : boardMode === 'loading' ? 'Conectando con la comunidad…' : 'Ranking de la comunidad no disponible'}</p>{boardMode === 'unavailable' ? <><p className="cup-muted" role="status">No se puede consultar el podio compartido. Tus marcas locales no se muestran como ranking público.</p><button className="cup-button secondary small" onClick={() => void refreshPodium()}>Reintentar conexión</button></> : <div className="cup-podium">{[0, 1, 2].map(index => { const r = records[index]; return <div className={`cup-record rank-${index + 1}`} key={index}><span className="cup-rank-number">0{index + 1}</span>{r ? <><Portrait character={characterById(r.character_id)}/><div><b>{r.nickname}</b><small>{r.wins === 5 ? 'Campeón de la copa' : `${r.wins}/5 duelos superados`}</small></div><strong>{format(r.score)}<small>PTS</small></strong></> : <div><b>{boardMode === 'loading' ? 'Cargando…' : 'Este lugar puede ser tuyo'}</b><small>{boardMode === 'loading' ? 'Consultando la clasificación.' : index === 0 ? 'La primera leyenda está por llegar.' : 'Juega y firma tu mejor marca.'}</small></div>}</div>; })}</div>}{boardMode === 'global' && <p className="cup-muted">Una marca por apodo. Solo las tres mejores llegan al podio.</p>}</section>
       <section className="cup-panel cup-rulebook"><p className="cup-eyebrow">CADA JUGADA CUENTA</p><h2>Juega por la gloria.</h2><dl><div><dt>Por cada gol en una victoria</dt><dd>+100</dd></div><div><dt>Victoria × nivel del duelo</dt><dd>+500</dd></div><div><dt>Victoria con arco invicto</dt><dd>+250</dd></div><div><dt>Completar la copa</dt><dd>+2.000</dd></div></dl><p>60 segundos de juego por duelo. Una derrota o empate cuesta una vida. Los reintentos no suman puntos.</p></section>
       <section className="cup-controls-guide"><p className="cup-eyebrow">ANTES DEL PITAZO</p><div><kbd>←</kbd><kbd>→</kbd><span>Moverse · también A / D</span></div><div><kbd>↑</kbd><span>Saltar · también W</span></div><div><kbd>ESPACIO</kbd><span>Patear · también Enter</span></div><div><kbd>P</kbd><span>Pausa · también Esc</span></div><p>Disponible en computadores. Usa el teclado para moverte, saltar y patear.</p></section>
     </aside></div><div className="cup-bottomline"><span>HECHO PARA LA COMUNIDAD. JUGADO CON EL CORAZÓN.</span><span>FEPUCV / ARCADE CLUB</span></div>

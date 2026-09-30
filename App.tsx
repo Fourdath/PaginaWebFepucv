@@ -27,8 +27,8 @@ import { Footer } from "./components/Footer";
 import AsistenteChat from "./components/AsistenteChat";
 
 import { NewsItem } from "./types";
-import { INITIAL_NEWS } from "./constants";
-import { NewsDraft, commitDraft, loadNews, saveNews } from "./lib/newsStore";
+import { NewsDraft } from "./lib/newsStore";
+import { deleteNews, fetchNews, isNewsEditor, saveNews, toggleFeatured } from "./lib/newsApi";
 
 const LegacyHashRedirect = () => {
   const navigate = useNavigate();
@@ -55,20 +55,37 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
-  const [news, setNews] = useState<NewsItem[]>(() => loadNews(INITIAL_NEWS));
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [newsError, setNewsError] = useState('');
 
-  const update = (next: NewsItem[]) => {
-    setNews(next);
-    saveNews(next);
+  const reloadNews = async () => {
+    if (!isNewsEditor()) setNews([]);
+    try {
+      setNews(await fetchNews());
+      setNewsError('');
+    } catch (error) {
+      setNewsError(error instanceof Error ? error.message : 'No se pudieron cargar las noticias.');
+      throw error;
+    } finally {
+      setNewsLoading(false);
+    }
   };
 
-  const handleSaveNews = (draft: NewsDraft, status: 'publicada' | 'borrador', author: string) =>
-    update(commitDraft(news, draft, status, author));
+  useEffect(() => { void reloadNews().catch(() => {}); }, []);
 
-  const handleDeleteNews = (id: string) => update(news.filter((n) => n.id !== id));
-
-  const handleToggleFeatured = (id: string) =>
-    update(news.map((n) => ({ ...n, featured: n.id === id ? !n.featured : false })));
+  const handleSaveNews = async (draft: NewsDraft, status: 'publicada' | 'borrador', author: string) => {
+    await saveNews(draft, status, author);
+    await reloadNews();
+  };
+  const handleDeleteNews = async (id: string) => {
+    await deleteNews(id);
+    await reloadNews();
+  };
+  const handleToggleFeatured = async (id: string) => {
+    await toggleFeatured(id, !news.find(n => n.id === id)?.featured);
+    await reloadNews();
+  };
 
   return (
     <Router>
@@ -81,10 +98,10 @@ const App: React.FC = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home news={news} />} />
-            <Route path="/noticias" element={<NewsList news={news} />} />
+            <Route path="/noticias" element={<NewsList news={news} loading={newsLoading} error={newsError} />} />
             <Route
               path="/noticias/:slug"
-              element={<NewsDetail news={news} />}
+              element={<NewsDetail news={news} loading={newsLoading} error={newsError} />}
             />
             <Route
               path="/consejeria-superior"
@@ -106,6 +123,9 @@ const App: React.FC = () => {
               element={
                 <AdminDashboard
                   news={news}
+                  loading={newsLoading}
+                  error={newsError}
+                  onReloadNews={reloadNews}
                   onSaveNews={handleSaveNews}
                   onDeleteNews={handleDeleteNews}
                   onToggleFeatured={handleToggleFeatured}

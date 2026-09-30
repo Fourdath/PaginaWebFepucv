@@ -1,7 +1,8 @@
 -- ---------------------------------------------------------------------------
--- Noticias FEPUCV. Paso opcional: cuando se quiera dejar de usar localStorage.
--- Bucket de fotos: crear en Storage un bucket publico llamado "noticias".
+-- Noticias FEPUCV compartidas entre navegadores.
 -- ---------------------------------------------------------------------------
+
+begin;
 
 create table if not exists public.noticias (
   id          uuid primary key default gen_random_uuid(),
@@ -27,21 +28,31 @@ create unique index if not exists noticias_una_destacada
 
 alter table public.noticias enable row level security;
 
+grant select on public.noticias to anon;
+grant select, insert, update, delete on public.noticias to authenticated;
+
 -- Lectura publica: solo lo publicado
+drop policy if exists "noticias publicas legibles" on public.noticias;
 create policy "noticias publicas legibles"
   on public.noticias for select
   using (status = 'publicada');
 
--- Escritura: solo usuarios autenticados (la mesa). Esta es la barrera real de
--- seguridad; la clave del formulario es solo disuasiva.
+-- Escritura: usuarios autenticados en este proyecto.
+drop policy if exists "mesa escribe noticias" on public.noticias;
 create policy "mesa escribe noticias"
   on public.noticias for all
   to authenticated
   using (true) with check (true);
 
 -- Storage: lectura publica del bucket, escritura autenticada
--- (ejecutar despues de crear el bucket "noticias")
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('noticias', 'noticias', true, 8388608, array['image/jpeg','image/png','image/webp','image/gif'])
+on conflict (id) do nothing;
+drop policy if exists "fotos noticias lectura" on storage.objects;
 create policy "fotos noticias lectura" on storage.objects for select
   using (bucket_id = 'noticias');
+drop policy if exists "fotos noticias escritura" on storage.objects;
 create policy "fotos noticias escritura" on storage.objects for insert
   to authenticated with check (bucket_id = 'noticias');
+
+commit;

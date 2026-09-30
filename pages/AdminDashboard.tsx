@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NewsItem } from '../types';
-import { MESA_MEMBERS, SESSION_KEY, checkPassword } from '../lib/auth';
+import { MESA_MEMBERS } from '../lib/auth';
+import { isNewsEditor, loginNewsEditor, logoutNewsEditor } from '../lib/newsApi';
 import {
   CATEGORIES,
   EMPTY_DRAFT,
@@ -13,37 +14,37 @@ import {
 
 interface AdminDashboardProps {
   news: NewsItem[];
+  loading: boolean;
+  error: string;
+  onReloadNews: () => Promise<void>;
   /** Guarda (crea o actualiza) una noticia. status decide si es visible en el sitio. */
-  onSaveNews: (draft: NewsDraft, status: 'publicada' | 'borrador', author: string) => void;
-  onDeleteNews: (id: string) => void;
-  onToggleFeatured: (id: string) => void;
+  onSaveNews: (draft: NewsDraft, status: 'publicada' | 'borrador', author: string) => Promise<void>;
+  onDeleteNews: (id: string) => Promise<void>;
+  onToggleFeatured: (id: string) => Promise<void>;
 }
 
 const MAX_IMAGES = 8;
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   news,
+  loading,
+  error: newsError,
+  onReloadNews,
   onSaveNews,
   onDeleteNews,
   onToggleFeatured,
 }) => {
-  const [session, setSession] = useState<string | null>(null);
+  const [session, setSession] = useState(isNewsEditor);
   const [member, setMember] = useState(MESA_MEMBERS[0]);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [checking, setChecking] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   const [draft, setDraft] = useState<NewsDraft>(EMPTY_DRAFT);
   const [toast, setToast] = useState('');
   const [dragging, setDragging] = useState(false);
-
-  useEffect(() => {
-    const saved = sessionStorage.getItem(SESSION_KEY);
-    if (saved) {
-      setSession(saved);
-      setMember(saved);
-    }
-  }, []);
 
   useEffect(() => {
     if (!toast) return;
@@ -54,22 +55,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setChecking(true);
-    const ok = await checkPassword(password);
-    setChecking(false);
-    if (!ok) {
-      setError('Clave incorrecta. Solo integrantes de la mesa.');
-      return;
+    try {
+      await loginNewsEditor(email.trim(), password);
+      await onReloadNews();
+      setSession(true);
+      setPassword('');
+      setError('');
+    } catch (cause) {
+      logoutNewsEditor();
+      setError(cause instanceof Error ? cause.message : 'No se pudo iniciar sesión.');
+    } finally {
+      setChecking(false);
     }
-    sessionStorage.setItem(SESSION_KEY, member);
-    setSession(member);
-    setPassword('');
-    setError('');
   };
 
   const logout = () => {
-    sessionStorage.removeItem(SESSION_KEY);
-    setSession(null);
+    logoutNewsEditor();
+    setSession(false);
     setDraft(EMPTY_DRAFT);
+    void onReloadNews().catch(() => {});
   };
 
   const addFiles = async (files: FileList | null) => {
@@ -90,14 +94,35 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       return { ...d, images };
     });
 
-  const commit = (status: 'publicada' | 'borrador') => {
+  const commit = async (status: 'publicada' | 'borrador') => {
     if (!draft.title.trim() || !draft.excerpt.trim() || !draft.content.trim()) {
       setToast('Falta titulo, bajada o texto de la noticia.');
       return;
     }
-    onSaveNews(draft, status, session || member);
-    setDraft(EMPTY_DRAFT);
-    setToast(status === 'publicada' ? 'Noticia publicada en el sitio.' : 'Borrador guardado. No es visible en el sitio.');
+    setSaving(true);
+    try {
+      await onSaveNews(draft, status, member);
+      setDraft(EMPTY_DRAFT);
+      setToast(status === 'publicada' ? 'Noticia publicada en el sitio.' : 'Borrador guardado. No es visible en el sitio.');
+    } catch (cause) {
+      setToast(cause instanceof Error ? cause.message : 'No se pudo guardar la noticia.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const changeFeatured = async (id: string) => {
+    setSaving(true);
+    try { await onToggleFeatured(id); setToast('Destacada actualizada en el sitio.'); }
+    catch (cause) { setToast(cause instanceof Error ? cause.message : 'No se pudo actualizar.'); }
+    finally { setSaving(false); }
+  };
+
+  const removeNews = async (id: string) => {
+    setSaving(true);
+    try { await onDeleteNews(id); setToast('Noticia eliminada del sitio.'); }
+    catch (cause) { setToast(cause instanceof Error ? cause.message : 'No se pudo eliminar.'); }
+    finally { setSaving(false); }
   };
 
   if (!session) {
@@ -109,9 +134,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
           <h1 className="text-xl font-bold text-fepucv-secondary text-center mb-2">Editor de noticias</h1>
           <p className="text-sm text-fepucv-textSecondary text-center mb-7">
-            Acceso para integrantes de la mesa directiva.
+            Acceso con la cuenta editora de la mesa directiva.
           </p>
           <form onSubmit={handleLogin} className="space-y-5">
+            <div>
+              <label className="block text-xs font-bold text-fepucv-text mb-2">Correo de la cuenta editora</label>
+              <input type="email" required autoComplete="username" value={email}
+                onChange={e => setEmail(e.target.value)}
+                className="w-full px-4 py-3 border border-fepucv-border rounded-fepucv text-sm outline-none focus:ring-2 focus:ring-fepucv-primary" />
+            </div>
             <div>
               <label className="block text-xs font-bold text-fepucv-text mb-2">Quien publica</label>
               <select
@@ -165,7 +196,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <div>
             <h1 className="text-xl font-bold text-fepucv-secondary">Editor de noticias</h1>
             <p className="text-sm text-fepucv-textSecondary">
-              Sesion de <strong className="text-fepucv-text">{session}</strong> &middot; {counts}
+              Sesion de <strong className="text-fepucv-text">{member}</strong> &middot; {counts}
             </p>
           </div>
           <div className="flex gap-2.5">
@@ -189,6 +220,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             {toast}
           </div>
         )}
+        {newsError && <p role="alert" className="text-sm text-fepucv-accent">Error al cargar noticias: {newsError}</p>}
+        {loading && <p className="text-sm text-fepucv-textSecondary">Cargando noticias...</p>}
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-6 items-start">
           <div className="bg-white border border-fepucv-border rounded-fepucv p-6 md:p-8 flex flex-col gap-6">
@@ -323,13 +356,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             <div className="flex flex-wrap gap-3 justify-end pt-5 border-t border-fepucv-border">
-              <button
+                <button disabled={saving || loading || !!newsError}
                 onClick={() => commit('borrador')}
                 className="border border-fepucv-border text-fepucv-textSecondary text-[11px] font-bold uppercase tracking-[0.12em] px-5 py-3.5 rounded-fepucv"
               >
                 Guardar borrador
               </button>
-              <button
+              <button disabled={saving || loading || !!newsError}
                 onClick={() => commit('publicada')}
                 className="bg-fepucv-primary text-fepucv-secondary text-[11px] font-bold uppercase tracking-[0.12em] px-7 py-3.5 rounded-fepucv hover:bg-fepucv-light transition-colors"
               >
@@ -370,14 +403,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           Editar
                         </button>
                         <button
-                          onClick={() => onToggleFeatured(item.id)}
+                          disabled={saving}
+                          onClick={() => changeFeatured(item.id)}
                           className="border border-fepucv-border rounded-full px-3 py-1 text-[10px] font-bold text-fepucv-secondary"
                         >
                           {item.featured ? 'Quitar destacada' : 'Destacar'}
                         </button>
                         <button
+                          disabled={saving}
                           onClick={() => {
-                            if (window.confirm('Eliminar "' + item.title + '"?')) onDeleteNews(item.id);
+                            if (window.confirm('Eliminar "' + item.title + '"?')) void removeNews(item.id);
                           }}
                           className="border border-fepucv-border rounded-full px-3 py-1 text-[10px] font-bold text-fepucv-accent"
                         >

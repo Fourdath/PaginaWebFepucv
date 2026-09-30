@@ -5,11 +5,16 @@ import { cover, gallery, isPublished, paragraphs } from '../lib/newsStore';
 
 interface NewsDetailProps {
   news: NewsItem[];
+  loading: boolean;
+  error: string;
 }
 
-export const NewsDetail: React.FC<NewsDetailProps> = ({ news }) => {
+export const NewsDetail: React.FC<NewsDetailProps> = ({ news, loading, error }) => {
   const { slug } = useParams();
   const article = news.find(n => n.slug === slug);
+
+  if (loading) return <p role="status" className="p-12 text-center">Cargando noticia...</p>;
+  if (error) return <p role="alert" className="p-12 text-center text-fepucv-accent">No se pudo cargar la noticia: {error}</p>;
 
   if (!article) {
     return (

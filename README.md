@@ -7,7 +7,15 @@ Sitio web oficial de la Federación de Estudiantes de la Pontificia Universidad 
 - Despliegue: Vercel
 
 > [!IMPORTANT]
-> El panel `/admin` incluido actualmente es un prototipo. No cuenta con autenticación segura ni persistencia: no debe considerarse un sistema de administración listo para producción. La migración propuesta a Supabase está documentada en la [hoja de ruta](#hoja-de-ruta-propuesta-supabase--cms).
+> Las noticias usan Supabase. La tabla, el bucket y una cuenta editora deben estar configurados antes de publicar el sitio.
+
+### Noticias compartidas
+
+1. Ejecutar `supabase/migrations/202609070002_noticias.sql`. Si esa migración ya se aplicó antes de crear el bucket, ejecutar `supabase/migrations/202609290001_noticias_storage.sql`. Ejecutar después `supabase/migrations/202609300001_noticias_editores.sql` para restringir la escritura a editores autorizados.
+2. Crear una cuenta con correo y contraseña en Supabase Auth → Users. Desde SQL Editor, autorizarla con `insert into public.noticias_editors(user_id) select id from auth.users where email = 'correo@ejemplo.cl';`, reemplazando el correo. El editor `/admin` inicia sesión con esa cuenta.
+3. Configurar `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` en `.env.local` y en las variables del proyecto Vercel; volver a desplegar después de configurarlas.
+
+El sitio consulta la tabla `noticias` al abrirse. Las noticias de ejemplo y el antiguo `localStorage` ya no se usan como contenido público. Los artículos creados anteriormente solo en un navegador requieren migración manual a Supabase; no se importan automáticamente para evitar que reaparezcan ejemplos ya eliminados.
 
 ## Estado actual
 
@@ -18,7 +26,7 @@ El portal funciona como una aplicación React de una sola página, con contenido
 | Área | Implementación actual |
 | --- | --- |
 | Inicio | Presentación institucional, Mesa Ejecutiva, Consejería Superior, consejerías de facultad y acceso a fondos |
-| Noticias | Listado y detalle de artículos cargados inicialmente desde `constants.tsx` |
+| Noticias | Listado y detalle de artículos compartidos desde Supabase |
 | Consejería Superior | Perfiles, biografías, enlaces y acceso a actas |
 | Facultades | Listado de facultades, representantes, carreras y enlaces de contacto |
 | Documentos | Buscador de estatutos, reglamentos y manuales alojados en Google Drive |
@@ -26,9 +34,9 @@ El portal funciona como una aplicación React de una sola página, con contenido
 | Contacto | Formulario gestionado mediante un servicio externo |
 | Minijuegos | Juego de fútbol integrado con integrantes de la FEPUCV |
 | Asistente virtual | API basada en Gemini y documentos oficiales; interfaz temporalmente deshabilitada |
-| Administración | Formulario prototipo para crear noticias solo en memoria del navegador |
+| Administración | Editor de noticias con Supabase Auth y persistencia compartida |
 
-El minijuego incorpora la **Copa FEPUCV**: cinco rivales con dificultad progresiva, caricaturas, controles táctiles, guardado de campaña, reinicio y top 3 local/compartido. Configuración de Supabase, arte y pruebas en [la guía del juego](docs/copa-fepucv.md).
+El minijuego incorpora la **Copa FEPUCV**: cinco rivales con dificultad progresiva, caricaturas, controles táctiles, guardado local de campaña, reinicio y podio compartido en Supabase. Configuración, arte y pruebas en [la guía del juego](docs/copa-fepucv.md).
 
 ### Rutas
 
@@ -46,7 +54,7 @@ El minijuego incorpora la **Copa FEPUCV**: cinco rivales con dificultad progresi
 | `/faq` | Preguntas frecuentes |
 | `/contacto` | Formulario de contacto |
 | `/minijuegos` | Minijuegos |
-| `/admin` | Panel administrativo experimental |
+| `/admin` | Editor de noticias con cuenta Supabase Auth |
 
 ## Tecnologías
 
@@ -141,7 +149,7 @@ Mientras no exista un CMS persistente, los principales contenidos se modifican d
 
 | Contenido | Archivo |
 | --- | --- |
-| Mesa Ejecutiva, consejerías, facultades y noticias iniciales | `constants.tsx` |
+| Mesa Ejecutiva, consejerías y facultades | `constants.tsx` |
 | Documentos, fondos, actas y carpetas de Drive | `pages/lib/sheetsDocs.ts` |
 | Consejería Superior detallada | `pages/ConsejeriaSuperiorPage.tsx` |
 | Textos de cada sección | Archivos de `pages/` |
@@ -194,7 +202,7 @@ La revisión se realizó sobre la rama `main`, incluyendo inspección del códig
 | Prioridad | Hallazgo | Acción recomendada |
 | --- | --- | --- |
 | Crítica | `/admin` valida una clave dentro del JavaScript público; no existe autenticación real, sesión segura ni control de permisos | Deshabilitar el panel actual hasta reemplazarlo por Supabase Auth y políticas RLS |
-| Crítica | Las noticias creadas en `/admin` solo se guardan en el estado de React y desaparecen al recargar | Persistir noticias en una base de datos y agregar borradores/publicación |
+| Resuelta en código; requiere configurar Supabase | Las noticias antes se guardaban por navegador y reaparecían ejemplos eliminados | Aplicar las migraciones y configurar las variables de despliegue descritas arriba |
 | Alta | `npm audit` detecta vulnerabilidades altas en la versión instalada de React Router y en `xlsx` | Actualizar React Router; sustituir o aislar el procesamiento con `xlsx` y validar archivos de entrada |
 | Alta | La API del asistente sigue accesible aunque la interfaz esté deshabilitada; no tiene límite de uso, autenticación ni límite explícito del cuerpo | Añadir rate limiting, validación de tamaño, control de origen y monitoreo de consumo |
 | Alta | `vite.config.js` define la clave de Gemini dentro de la configuración del bundle del cliente | Eliminar esa definición y consumir la clave exclusivamente desde `api/asistente.js` |

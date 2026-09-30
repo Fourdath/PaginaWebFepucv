@@ -5,9 +5,11 @@ import { CATEGORIES, cover, isPublished } from '../lib/newsStore';
 
 interface NewsListProps {
   news: NewsItem[];
+  loading: boolean;
+  error: string;
 }
 
-export const NewsList: React.FC<NewsListProps> = ({ news }) => {
+export const NewsList: React.FC<NewsListProps> = ({ news, loading, error }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todas');
 
@@ -32,6 +34,8 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
 
   return (
     <div className="bg-white min-h-screen">
+      {loading && <p role="status" className="max-w-content mx-auto p-6">Cargando noticias...</p>}
+      {error && <p role="alert" className="max-w-content mx-auto p-6 text-fepucv-accent">No se pudieron cargar las noticias: {error}</p>}
       <section className="bg-fepucv-surface border-b border-fepucv-border py-16 md:py-20">
         <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-fepucv-secondary mb-3">
@@ -120,7 +124,7 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
       )}
 
       <section className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        {matches.length === 0 ? (
+        {!loading && !error && matches.length === 0 ? (
           <div className="border border-dashed border-fepucv-border rounded-fepucv py-20 text-center">
             <p className="text-lg text-fepucv-textSecondary mb-3">No hay noticias con esos criterios.</p>
             <button

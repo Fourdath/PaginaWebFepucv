@@ -33,15 +33,19 @@ export function saveLocalRecord(entry: RecordEntry) {
   const entries = topThree([...readLocalRecords(), entry]);
   try { localStorage.setItem(BOARD, JSON.stringify(entries)); return { entries, saved: true }; } catch { return { entries, saved: false }; }
 }
-// Publishable configuration is intentionally versioned: it grants no table access.
-// Dedicated overrides avoid the portal's older, unrelated Supabase configuration.
-const url = import.meta.env?.VITE_COPA_SUPABASE_URL || 'https://kvelueguheafshtntehu.supabase.co';
-const key = import.meta.env?.VITE_COPA_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_f1CIsT5VgLAhj_aEW8OZRQ_NArlcuFv';
+// El podio comparte la configuración de Supabase con Noticias, salvo que se
+// configure expresamente otro proyecto para la Copa.
+const url = import.meta.env?.VITE_COPA_SUPABASE_URL || import.meta.env?.VITE_SUPABASE_URL;
+const key = import.meta.env?.VITE_COPA_SUPABASE_PUBLISHABLE_KEY || import.meta.env?.VITE_SUPABASE_ANON_KEY || import.meta.env?.VITE_SUPABASE_PUBLISHABLE_KEY;
 async function rpc(name: string, args = {}) {
   if (!url || !key) throw new Error('Ranking compartido sin configurar');
   const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/rpc/${name}`, { method: 'POST', headers: { apikey: key, 'Content-Type': 'application/json' }, body: JSON.stringify(args), signal: AbortSignal.timeout(8000) });
   if (!response.ok) throw new Error('Ranking compartido no disponible');
-  return response.json();
+  return parseRpcResponse(response);
+}
+export async function parseRpcResponse(response: Response): Promise<unknown> {
+  const body = await response.text();
+  return body ? JSON.parse(body) : null;
 }
 export async function readGlobalRecords(): Promise<RecordEntry[]> {
   const result = await rpc('copa_top3');

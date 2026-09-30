@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { advanceCampaign, campaignPoints, isCampaign, matchPoints, opponentIds, STAGES } from '../src/minijuegos/futbol-fepucv/campaign.ts';
 import { createArena, stepArena, FLOOR, WIDTH } from '../src/minijuegos/futbol-fepucv/engine.ts';
-import { topThree, readCampaign, saveCampaign, readLocalRecords, saveLocalRecord, validNickname } from '../src/minijuegos/futbol-fepucv/storage.ts';
+import { topThree, readCampaign, saveCampaign, readLocalRecords, saveLocalRecord, validNickname, parseRpcResponse } from '../src/minijuegos/futbol-fepucv/storage.ts';
 import { nicknameOptions } from '../src/minijuegos/futbol-fepucv/nicknames.ts';
 
 const fresh = () => ({ id: 'fe000000-0000-4000-8000-000000000001', characterId: 1, stage: 0, lives: 3, results: [] });
@@ -36,6 +36,10 @@ test('podium keeps three distinct nicknames, best score and deterministic ties',
   const result = topThree([e('Cóndor Audaz 101', 900), e('Cóndor Audaz 101', 1000), e('Puma Veloz 202', 1000, '2026-09-02'), e('Zorro Noble 303', 800), e('León Ágil 404', 700), e('X', NaN)]);
   assert.deepEqual(result.map(r => r.nickname), ['Cóndor Audaz 101', 'Puma Veloz 202', 'Zorro Noble 303']);
   assert.ok(validNickname('Cóndor Audaz 482')); assert.ok(!validNickname('<script>')); assert.ok(!validNickname('a'));
+});
+test('RPC accepts a successful empty response when a score is submitted', async () => {
+  assert.equal(await parseRpcResponse(new Response(null, { status: 204 })), null);
+  assert.deepEqual(await parseRpcResponse(new Response('[{"score":850}]')), [{ score: 850 }]);
 });
 test('campaign and local top three survive reload; blocked storage is handled', () => {
   const data = new Map();

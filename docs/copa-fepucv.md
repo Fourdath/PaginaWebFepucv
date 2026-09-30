@@ -13,18 +13,18 @@ Minijuego arcade en `/minijuegos`. Seis integrantes seleccionables, cinco duelos
 
 ## Ranking compartido
 
-Aplicar `supabase/migrations/202609070001_copa_fepucv.sql` en el proyecto de Supabase destinado al juego. La migración es transaccional e idempotente. El cliente incluye la URL y la clave **publicable** del proyecto Fepucv (`kvelueguheafshtntehu`) creado en la organización gratuita FEPUCV. Así el mismo ranking funciona al publicar sin copiar secretos ni depender de la configuración antigua del portal. Para cambiar de proyecto se pueden definir estas variables en `.env.local` y en Vercel:
+Aplicar `supabase/migrations/202609070001_copa_fepucv.sql` en un proyecto Supabase activo. La migración es transaccional e idempotente. Por defecto el juego utiliza `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`, las mismas variables del portal. Si la Copa usa otro proyecto, definir estas variables en `.env.local` y en Vercel:
 
 ```dotenv
 VITE_COPA_SUPABASE_URL=https://PROJECT_ID.supabase.co
 VITE_COPA_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
-Ambos valores deben pertenecer al mismo proyecto. La clave publicable está destinada al navegador; la protección real está en los permisos de la base de datos. Nunca usar `service_role`, claves secretas o contraseñas en variables `VITE_*`. Reiniciar Vite/recompilar después de cambiar variables. Las variables genéricas `VITE_SUPABASE_*` del portal no se utilizan para el minijuego.
+Ambos valores deben pertenecer al mismo proyecto. La clave publicable está destinada al navegador; la protección real está en los permisos de la base de datos. Nunca usar `service_role`, claves secretas o contraseñas en variables `VITE_*`. Reiniciar Vite/recompilar después de cambiar variables.
 
 La aplicación llama a `copa_top3` y `copa_submit` mediante REST. Las tablas tienen RLS y carecen de acceso directo público; las funciones definen `search_path` vacío y exponen únicamente las operaciones del juego. El servidor recalcula los puntos, valida campañas completas, evita reenvíos del mismo identificador y conserva la mejor marca por apodo, ignorando mayúsculas. Los desempates favorecen más duelos ganados y luego la marca más antigua.
 
-La interfaz distingue el ranking global del local; un error de red nunca se presenta como publicación exitosa. El respaldo local muestra sus propios tres mejores puntajes y permite reintentar la publicación. Una marca de cero puntos no ingresa al ranking.
+El podio muestra exclusivamente el ranking compartido. Si falla la conexión, muestra un error y permite reintentar; las marcas locales quedan pendientes en ese dispositivo y pueden reenviarse desde la campaña terminada. Una marca de cero puntos no ingresa al ranking.
 
 Los apodos se eligen entre combinaciones de un catálogo cerrado (animal + cualidad + número de tres dígitos), por ejemplo **Cóndor Audaz 482**. No hay campo de texto libre. `nicknames.ts` genera tres opciones y la persona puede pedir otras. La función de Supabase valida exactamente el mismo vocabulario, incluso ante llamadas directas a la API. El catálogo ofrece 90.000 combinaciones; los apodos no son cuentas verificadas.
 
