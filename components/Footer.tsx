@@ -49,12 +49,13 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-lg mb-6 border-b border-fepucv-primary/30 pb-2 inline-block text-white">Explorar</h4>
             <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link to="/facultades" className="hover:text-fepucv-primary transition-colors">Facultades</Link></li>
-              <li><Link to="/minijuegos" className="hover:text-fepucv-primary transition-colors">Minijuegos</Link></li>
-              <li><Link to="/noticias" className="hover:text-fepucv-primary transition-colors">Noticias</Link></li>
-              <li><Link to="/consejeria-superior" className="hover:text-fepucv-primary transition-colors">Consejería Superior</Link></li>
-              <li><Link to="/reglamentos" className="hover:text-fepucv-primary transition-colors">Reglamentos</Link></li>
               <li><Link to="/transparencia" className="hover:text-fepucv-primary transition-colors">Transparencia</Link></li>
+              <li><Link to="/elecciones" className="hover:text-fepucv-primary transition-colors">Elecciones</Link></li>
+              <li><Link to="/reglamentos" className="hover:text-fepucv-primary transition-colors">Documentos</Link></li>
+              <li><Link to="/noticias" className="hover:text-fepucv-primary transition-colors">Noticias</Link></li>
+              <li><Link to="/facultades" className="hover:text-fepucv-primary transition-colors">Facultades</Link></li>
+              <li><Link to="/consejeria-superior" className="hover:text-fepucv-primary transition-colors">Consejería Superior</Link></li>
+              <li><Link to="/minijuegos" className="hover:text-fepucv-primary transition-colors">Minijuegos</Link></li>
             </ul>
           </div>
 

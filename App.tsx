@@ -14,6 +14,7 @@ import { NewsDetail } from "./pages/NewsDetail";
 import { ConsejeriaSuperiorPage } from "./pages/ConsejeriaSuperiorPage";
 import { RegulationsPage } from "./pages/RegulationsPage";
 import { TransparencyPage } from "./pages/TransparencyPage";
+import { ElectionsPage } from "./pages/ElectionsPage";
 import { AboutUs } from "./pages/AboutUs";
 import { FAQPage } from "./pages/FAQPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -109,6 +110,7 @@ const App: React.FC = () => {
             />
             <Route path="/reglamentos" element={<RegulationsPage />} />
             <Route path="/transparencia" element={<TransparencyPage />} />
+            <Route path="/elecciones" element={<ElectionsPage />} />
             <Route path="/quienes-somos" element={<AboutUs />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/contacto" element={<ContactPage />} />

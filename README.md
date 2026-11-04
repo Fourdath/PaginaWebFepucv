@@ -31,12 +31,15 @@ El portal funciona como una aplicación React de una sola página, con contenido
 | Facultades | Listado de facultades, representantes, carreras y enlaces de contacto |
 | Documentos | Buscador de estatutos, reglamentos y manuales alojados en Google Drive |
 | Transparencia | Acceso a actas, rendiciones y gráficos generados desde planillas Excel de Drive |
+| Elecciones | Calendario interactivo de noviembre y diciembre de 2026, correos electorales y resultados de 2025 |
 | Contacto | Formulario gestionado mediante un servicio externo |
 | Minijuegos | Juego de fútbol integrado con integrantes de la FEPUCV |
 | Asistente virtual | API basada en Gemini y documentos oficiales; interfaz temporalmente deshabilitada |
 | Administración | Editor de noticias con Supabase Auth y persistencia compartida |
 
 El minijuego incorpora la **Copa FEPUCV**: cinco rivales con dificultad progresiva, caricaturas, controles táctiles, guardado local de campaña, reinicio y podio compartido en Supabase. Configuración, arte y pruebas en [la guía del juego](docs/copa-fepucv.md).
+
+El calendario y los resultados electorales se mantienen en `pages/ElectionsPage.tsx`; los afiches de referencia están en `public/img/elecciones/`. El silencio electoral de segunda vuelta se conserva el **6 de noviembre de 2026**, como indica el afiche y según confirmación expresa del responsable del sitio.
 
 ### Rutas
 
@@ -50,6 +53,7 @@ El minijuego incorpora la **Copa FEPUCV**: cinco rivales con dificultad progresi
 | `/facultades/:slug` | Detalle de una facultad |
 | `/reglamentos` | Documentos y reglamentos |
 | `/transparencia` | Transparencia y análisis financiero |
+| `/elecciones` | Calendario electoral 2026 y resultados 2025 |
 | `/quienes-somos` | Información institucional en desarrollo |
 | `/faq` | Preguntas frecuentes |
 | `/contacto` | Formulario de contacto |
